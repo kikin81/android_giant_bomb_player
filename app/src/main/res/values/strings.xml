@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">GBPlayer</string>
+
+    <!--  Latest videos  -->
+    <string name="video_list_title">Latest Videos</string>
 </resources>
