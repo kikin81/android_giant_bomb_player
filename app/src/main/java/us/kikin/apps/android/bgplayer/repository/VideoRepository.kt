@@ -12,9 +12,22 @@ class VideoRepository @Inject constructor(
     suspend fun getVideos() =
         videoApiHelper.getVideos().videos.map {
             VideoModel(
+                it.id,
                 it.name,
                 it.length,
-                it.imageDto.screenUrl
+                it.imageDto.screenUrl,
+                it.description
             )
         }
+
+    suspend fun getVideoById(videoId: Long): VideoModel {
+        val response = videoApiHelper.getVideoById(videoId).video
+        return VideoModel(
+            response.id,
+            response.name,
+            response.length,
+            response.imageDto.screenUrl,
+            response.description
+        )
+    }
 }

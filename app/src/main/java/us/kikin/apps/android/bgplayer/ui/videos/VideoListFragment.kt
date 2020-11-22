@@ -6,13 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import us.kikin.apps.android.bgplayer.R
 
 @AndroidEntryPoint
-class VideoListFragment : Fragment() {
+class VideoListFragment : Fragment(), VideoAdapter.VideoListClickListener {
 
     private val videoViewModel: VideoViewModel by viewModels()
     private lateinit var recyclerView: RecyclerView
@@ -21,7 +22,7 @@ class VideoListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        videoViewModel.videoLiveData.observe(
+        videoViewModel.videoListLiveData.observe(
             requireActivity(),
             {
                 adapter.updateItems(it)
@@ -38,9 +39,14 @@ class VideoListFragment : Fragment() {
 
         recyclerView = view.findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        adapter = VideoAdapter()
+        adapter = VideoAdapter(this)
         recyclerView.adapter = adapter
 
         return view
+    }
+
+    override fun onVideoClicked(videoId: Long) {
+        val action = VideoListFragmentDirections.videoDetailAction(videoId)
+        findNavController().navigate(action)
     }
 }

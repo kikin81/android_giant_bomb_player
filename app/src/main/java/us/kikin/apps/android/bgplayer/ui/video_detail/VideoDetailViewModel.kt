@@ -1,4 +1,4 @@
-package us.kikin.apps.android.bgplayer.ui.videos
+package us.kikin.apps.android.bgplayer.ui.video_detail
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
@@ -8,16 +8,16 @@ import kotlinx.coroutines.launch
 import us.kikin.apps.android.bgplayer.models.VideoModel
 import us.kikin.apps.android.bgplayer.repository.VideoRepository
 
-class VideoViewModel @ViewModelInject constructor(
+class VideoDetailViewModel @ViewModelInject constructor(
     private val videoRepository: VideoRepository
 ) : ViewModel() {
 
-    val videoListLiveData = MutableLiveData<List<VideoModel>>()
+    val videoLiveData = MutableLiveData<VideoModel>()
 
-    init {
+    fun getVideoById(videoId: Long) {
         viewModelScope.launch {
-            val response = videoRepository.getVideos()
-            videoListLiveData.postValue(response)
+            val response = videoRepository.getVideoById(videoId)
+            videoLiveData.postValue(response)
         }
     }
 }
