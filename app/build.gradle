@@ -70,6 +70,9 @@ dependencies {
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_view_model_version"
     kapt "androidx.hilt:hilt-compiler:$hilt_view_model_version"
 
+    // image loading
+    implementation "io.coil-kt:coil:$coil_version"
+
 
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

@@ -3,8 +3,10 @@ package us.kikin.apps.android.bgplayer.ui.videos
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import us.kikin.apps.android.bgplayer.R
 import us.kikin.apps.android.bgplayer.models.VideoModel
 
@@ -20,8 +22,9 @@ class VideoAdapter : RecyclerView.Adapter<VideoAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = videos[position]
-        holder.idView.text = item.name
-        holder.contentView.text = item.length.toString()
+        holder.titleView.text = item.name
+        holder.lengthView.text = item.length.toString()
+        holder.thumbnailView.load(item.thumbnailUrl)
     }
 
     override fun getItemCount(): Int = videos.size
@@ -33,11 +36,12 @@ class VideoAdapter : RecyclerView.Adapter<VideoAdapter.ViewHolder>() {
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val idView: TextView = view.findViewById(R.id.item_number)
-        val contentView: TextView = view.findViewById(R.id.content)
+        val titleView: TextView = view.findViewById(R.id.video_title)
+        val lengthView: TextView = view.findViewById(R.id.video_length)
+        val thumbnailView: ImageView = view.findViewById(R.id.video_thumbnail)
 
         override fun toString(): String {
-            return super.toString() + " '" + contentView.text + "'"
+            return super.toString() + " '" + lengthView.text + "'"
         }
     }
 }
