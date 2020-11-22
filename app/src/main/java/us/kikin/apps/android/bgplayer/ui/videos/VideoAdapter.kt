@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import us.kikin.apps.android.bgplayer.R
-import us.kikin.apps.android.bgplayer.ui.videos.dummy.DummyContent.DummyItem
+import us.kikin.apps.android.bgplayer.models.VideoModel
 
-class VideoAdapter(
-    private val values: List<DummyItem>
-) : RecyclerView.Adapter<VideoAdapter.ViewHolder>() {
+class VideoAdapter : RecyclerView.Adapter<VideoAdapter.ViewHolder>() {
+
+    private val videos = ArrayList<VideoModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -19,12 +19,12 @@ class VideoAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = values[position]
-        holder.idView.text = item.id
-        holder.contentView.text = item.content
+        val item = videos[position]
+        holder.idView.text = item.name
+        holder.contentView.text = item.length.toString()
     }
 
-    override fun getItemCount(): Int = values.size
+    override fun getItemCount(): Int = videos.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val idView: TextView = view.findViewById(R.id.item_number)
