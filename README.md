@@ -13,3 +13,11 @@ Third Party Libraries:
 * Hilt (dagger dependency injection)
 * Okhttp/retrofit
 * coil
+
+## IMPORTANT
+
+You need to define the giant bomb api key in gradle.properties
+
+```
+giant_bomb_api_key="YOUR_API_KEY"
+```
