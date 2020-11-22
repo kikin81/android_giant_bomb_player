@@ -3,11 +3,14 @@ package us.kikin.apps.android.bgplayer.models
 import android.text.format.DateUtils
 import us.kikin.apps.android.bgplayer.network.VideoDto
 import java.util.Date
+import kotlin.time.DurationUnit
+import kotlin.time.ExperimentalTime
+import kotlin.time.toDuration
 
-class VideoModel(
+data class VideoModel(
     val id: Long,
     val name: String,
-    val length: Int,
+    val length: Long,
     val thumbnailUrl: String,
     val description: String,
     val publishedDate: Date
@@ -22,11 +25,24 @@ class VideoModel(
             dto.publishedDate
         )
 
-    fun publishDateDisplay(): String {
-        val now = System.currentTimeMillis();
-        return DateUtils.getRelativeTimeSpanString(
+    val publishedRelativeDay: String by lazy {
+        val now = System.currentTimeMillis()
+        DateUtils.getRelativeTimeSpanString(
             publishedDate.time,
             now,
-            DateUtils.MINUTE_IN_MILLIS).toString()
+            DateUtils.MINUTE_IN_MILLIS
+        ).toString()
+    }
+
+    val runtimeDisplay: String by lazy {
+        val hours = length / 3600
+        val minutes = (length % 3600) / 60
+        val seconds = length % 60
+
+        if (hours > 0) {
+            String.format("%d:%02d:%02d", hours, minutes, seconds)
+        } else {
+            String.format("%02d:%02d", minutes, seconds)
+        }
     }
 }

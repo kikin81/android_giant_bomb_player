@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import us.kikin.apps.android.bgplayer.R
 import us.kikin.apps.android.bgplayer.models.VideoModel
+import kotlin.time.ExperimentalTime
 
 class VideoAdapter(
     private val listener: VideoListClickListener
@@ -48,10 +49,11 @@ class VideoAdapter(
         private val thumbnailView: ImageView = view.findViewById(R.id.video_thumbnail)
         private val publishedView: TextView = view.findViewById(R.id.video_published_date)
 
+        @OptIn(ExperimentalTime::class)
         fun bind(item: VideoModel) {
             titleView.text = item.name
-            lengthView.text = item.length.toString()
-            publishedView.text = item.publishDateDisplay()
+            lengthView.text = item.runtimeDisplay
+            publishedView.text = item.publishedRelativeDay
             thumbnailView.load(item.thumbnailUrl) {
                 crossfade(true)
             }
