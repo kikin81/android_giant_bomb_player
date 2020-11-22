@@ -26,6 +26,12 @@ class VideoAdapter : RecyclerView.Adapter<VideoAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = videos.size
 
+    fun updateItems(newItems: List<VideoModel>) {
+        videos.clear()
+        videos.addAll(newItems)
+        notifyDataSetChanged()
+    }
+
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val idView: TextView = view.findViewById(R.id.item_number)
         val contentView: TextView = view.findViewById(R.id.content)
