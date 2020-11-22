@@ -53,7 +53,6 @@ class VideoAdapter(
             lengthView.text = item.length.toString()
             thumbnailView.load(item.thumbnailUrl) {
                 crossfade(true)
-                transformations(RoundedCornersTransformation(8f, 8f, 8f, 8f))
             }
         }
     }
