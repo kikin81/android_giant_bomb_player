@@ -46,10 +46,12 @@ class VideoAdapter(
         private val titleView: TextView = view.findViewById(R.id.video_title)
         private val lengthView: TextView = view.findViewById(R.id.video_length)
         private val thumbnailView: ImageView = view.findViewById(R.id.video_thumbnail)
+        private val publishedView: TextView = view.findViewById(R.id.video_published_date)
 
         fun bind(item: VideoModel) {
             titleView.text = item.name
             lengthView.text = item.length.toString()
+            publishedView.text = item.publishDateDisplay()
             thumbnailView.load(item.thumbnailUrl) {
                 crossfade(true)
             }

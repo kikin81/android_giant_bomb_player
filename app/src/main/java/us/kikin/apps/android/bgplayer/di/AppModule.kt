@@ -24,7 +24,11 @@ class AppModule {
     fun provideBaseUrl() = "https://www.giantbomb.com/api/"
 
     @Provides
-    fun provideGson(): Gson = GsonBuilder().setLenient().create()
+    fun provideGson(): Gson =
+        GsonBuilder()
+            .setLenient()
+            .setDateFormat("yyyy-MM-dd HH:mm:ss")
+            .create()
 
     @Provides
     @Singleton
@@ -61,12 +65,13 @@ class AppModule {
     @Singleton
     fun provideRetrofit(
         okHttpClient: OkHttpClient,
-        baseUrl: String
+        baseUrl: String,
+        gson: Gson
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
 

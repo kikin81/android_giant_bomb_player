@@ -1,11 +1,13 @@
 package us.kikin.apps.android.bgplayer.network
 
 import com.google.gson.annotations.SerializedName
+import java.util.Date
 
 class VideoDto(
     @SerializedName("id") val id: Long,
     @SerializedName("name") val name: String,
     @SerializedName("length_seconds") val length: Int,
     @SerializedName("image") val imageDto: ImageDto,
-    @SerializedName("deck") val description: String
+    @SerializedName("deck") val description: String,
+    @SerializedName("publish_date") val publishedDate: Date
 )
