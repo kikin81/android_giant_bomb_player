@@ -1,11 +1,8 @@
 package us.kikin.apps.android.bgplayer.models
 
 import android.text.format.DateUtils
-import us.kikin.apps.android.bgplayer.network.VideoDto
 import java.util.Date
-import kotlin.time.DurationUnit
-import kotlin.time.ExperimentalTime
-import kotlin.time.toDuration
+import us.kikin.apps.android.bgplayer.network.VideoDto
 
 data class VideoModel(
     val id: Long,
