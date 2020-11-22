@@ -7,7 +7,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import coil.transform.RoundedCornersTransformation
 import us.kikin.apps.android.bgplayer.R
 import us.kikin.apps.android.bgplayer.models.VideoModel
 
