@@ -28,16 +28,34 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient() =
+    fun provideOkHttpClient(): OkHttpClient {
+        val clientBuilder = OkHttpClient.Builder()
+        clientBuilder.addInterceptor { chain ->
+            val original = chain.request()
+            val originalUrl = original.url
+
+            val url = originalUrl.newBuilder()
+                .addQueryParameter(
+                    "api_key",
+                    BuildConfig.ApiKey
+                )
+                .addQueryParameter(
+                    "format",
+                    "json"
+                ).build()
+
+            val requestBuilder = original.newBuilder().url(url)
+            val request = requestBuilder.build()
+            chain.proceed(request)
+        }
         if (BuildConfig.DEBUG) {
             val logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-            OkHttpClient.Builder()
+            clientBuilder
                 .addInterceptor(logger)
-                .build()
-        } else {
-            OkHttpClient.Builder()
-                .build()
         }
+
+        return clientBuilder.build()
+    }
 
     @Provides
     @Singleton
