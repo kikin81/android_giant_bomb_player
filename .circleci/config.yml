@@ -10,4 +10,4 @@ jobs:
     steps:
       - checkout
       - run:
-          command: ./gradlew build
+          command: ./gradlew build -Pgiant_bomb_api_key=$GB_API_KEY
