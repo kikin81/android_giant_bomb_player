@@ -1,5 +1,7 @@
 # Giant bomb video player android app
 
+[![kikin81](https://circleci.com/gh/kikin81/android_giant_bomb_player.svg?style=shield)](https://app.circleci.com/pipelines/github/kikin81/android_giant_bomb_player)
+
 Android application that uses the Giant Bomb Api to request videos.
 
 Uses Android Architect Components:
