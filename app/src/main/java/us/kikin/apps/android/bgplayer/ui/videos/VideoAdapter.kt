@@ -30,7 +30,7 @@ class VideoAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = videos[position]
         holder.bind(item)
-        holder.itemView.setOnClickListener{
+        holder.itemView.setOnClickListener {
             listener.onVideoClicked(item.id)
         }
     }
