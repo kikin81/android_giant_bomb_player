@@ -19,17 +19,6 @@ class VideoListFragment : Fragment(), VideoAdapter.VideoListClickListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: VideoAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        videoViewModel.videoListLiveData.observe(
-            requireActivity(),
-            {
-                adapter.updateItems(it)
-            }
-        )
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,6 +32,17 @@ class VideoListFragment : Fragment(), VideoAdapter.VideoListClickListener {
         recyclerView.adapter = adapter
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        videoViewModel.videoListLiveData.observe(
+            viewLifecycleOwner,
+            {
+                adapter.updateItems(it)
+            }
+        )
     }
 
     override fun onVideoClicked(videoId: Long) {

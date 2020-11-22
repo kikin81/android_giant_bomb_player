@@ -23,18 +23,6 @@ class VideoDetailFragment : Fragment() {
     private lateinit var descriptionView: TextView
     private lateinit var videoImageView: ImageView
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        viewModel.getVideoById(args.videoId)
-        viewModel.videoLiveData.observe(
-            requireActivity(),
-            {
-                bindVideo(it)
-            }
-        )
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,6 +34,18 @@ class VideoDetailFragment : Fragment() {
         videoImageView = view.findViewById(R.id.video_thumbnail)
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.getVideoById(args.videoId)
+        viewModel.videoLiveData.observe(
+            viewLifecycleOwner,
+            {
+                bindVideo(it)
+            }
+        )
     }
 
     private fun bindVideo(video: VideoModel) {
