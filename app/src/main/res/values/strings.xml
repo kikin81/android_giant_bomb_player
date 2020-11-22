@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">GBPlayer</string>
 
-    <!--  Latest videos  -->
+    <!--  Latest videos fragment  -->
     <string name="video_list_title">Latest Videos</string>
     <string name="video_thumbnail_content_description">video thumbnail</string>
+
+    <!--  Video detail fragment  -->
+    <string name="video_detail_title">Video detail</string>
 </resources>

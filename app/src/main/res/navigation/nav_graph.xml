@@ -9,5 +9,18 @@
         android:id="@+id/videoListFragment"
         android:name="us.kikin.apps.android.bgplayer.ui.videos.VideoListFragment"
         android:label="@string/video_list_title"
-        tools:layout="@layout/fragment_video_list" />
+        tools:layout="@layout/fragment_video_list">
+        <action
+            android:id="@+id/videoDetailAction"
+            app:destination="@id/videoDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/videoDetailFragment"
+        android:name="us.kikin.apps.android.bgplayer.ui.video_detail.VideoDetailFragment"
+        android:label="@string/video_detail_title"
+        tools:layout="@layout/fragment_video_detail">
+        <argument
+            android:name="videoId"
+            app:argType="long" />
+    </fragment>
 </navigation>

@@ -8,4 +8,7 @@ class VideoApiHelperImpl @Inject constructor(
     private val api: VideoApi
 ) : VideoApiHelper {
     override suspend fun getVideos() = api.fetchVideos()
+
+    override suspend fun getVideoById(videoId: Long) =
+        api.fetchVideoById(videoId)
 }

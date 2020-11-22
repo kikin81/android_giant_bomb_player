@@ -11,7 +11,13 @@ import coil.transform.RoundedCornersTransformation
 import us.kikin.apps.android.bgplayer.R
 import us.kikin.apps.android.bgplayer.models.VideoModel
 
-class VideoAdapter : RecyclerView.Adapter<VideoAdapter.ViewHolder>() {
+class VideoAdapter(
+    private val listener: VideoListClickListener
+) : RecyclerView.Adapter<VideoAdapter.ViewHolder>() {
+
+    interface VideoListClickListener {
+        fun onVideoClicked(videoId: Long)
+    }
 
     private val videos = ArrayList<VideoModel>()
 
@@ -23,11 +29,9 @@ class VideoAdapter : RecyclerView.Adapter<VideoAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = videos[position]
-        holder.titleView.text = item.name
-        holder.lengthView.text = item.length.toString()
-        holder.thumbnailView.load(item.thumbnailUrl) {
-            crossfade(true)
-            transformations(RoundedCornersTransformation(8f, 8f, 8f, 8f))
+        holder.bind(item)
+        holder.itemView.setOnClickListener {
+            listener.onVideoClicked(item.id)
         }
     }
 
@@ -40,12 +44,17 @@ class VideoAdapter : RecyclerView.Adapter<VideoAdapter.ViewHolder>() {
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val titleView: TextView = view.findViewById(R.id.video_title)
-        val lengthView: TextView = view.findViewById(R.id.video_length)
-        val thumbnailView: ImageView = view.findViewById(R.id.video_thumbnail)
+        private val titleView: TextView = view.findViewById(R.id.video_title)
+        private val lengthView: TextView = view.findViewById(R.id.video_length)
+        private val thumbnailView: ImageView = view.findViewById(R.id.video_thumbnail)
 
-        override fun toString(): String {
-            return super.toString() + " '" + lengthView.text + "'"
+        fun bind(item: VideoModel) {
+            titleView.text = item.name
+            lengthView.text = item.length.toString()
+            thumbnailView.load(item.thumbnailUrl) {
+                crossfade(true)
+                transformations(RoundedCornersTransformation(8f, 8f, 8f, 8f))
+            }
         }
     }
 }

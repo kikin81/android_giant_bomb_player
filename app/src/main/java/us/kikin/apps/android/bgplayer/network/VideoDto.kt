@@ -6,5 +6,6 @@ class VideoDto(
     @SerializedName("id") val id: Long,
     @SerializedName("name") val name: String,
     @SerializedName("length_seconds") val length: Int,
-    @SerializedName("image") val imageDto: ImageDto
+    @SerializedName("image") val imageDto: ImageDto,
+    @SerializedName("deck") val description: String
 )
