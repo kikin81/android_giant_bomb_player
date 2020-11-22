@@ -4,5 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 class ImageDto(
     @SerializedName("icon_url") val iconUrl: String,
-    @SerializedName("thumb_url") val thumbUrl: String
+    @SerializedName("thumb_url") val thumbUrl: String,
+    @SerializedName("screen_url") val screenUrl: String
 )

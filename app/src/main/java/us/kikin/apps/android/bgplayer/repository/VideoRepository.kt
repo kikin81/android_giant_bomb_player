@@ -14,7 +14,7 @@ class VideoRepository @Inject constructor(
             VideoModel(
                 it.name,
                 it.length,
-                it.imageDto.thumbUrl
+                it.imageDto.screenUrl
             )
         }
 }

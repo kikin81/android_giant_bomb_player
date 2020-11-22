@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.transform.RoundedCornersTransformation
 import us.kikin.apps.android.bgplayer.R
 import us.kikin.apps.android.bgplayer.models.VideoModel
 
@@ -24,7 +25,10 @@ class VideoAdapter : RecyclerView.Adapter<VideoAdapter.ViewHolder>() {
         val item = videos[position]
         holder.titleView.text = item.name
         holder.lengthView.text = item.length.toString()
-        holder.thumbnailView.load(item.thumbnailUrl)
+        holder.thumbnailView.load(item.thumbnailUrl) {
+            crossfade(true)
+            transformations(RoundedCornersTransformation(8f, 8f, 8f, 8f))
+        }
     }
 
     override fun getItemCount(): Int = videos.size
