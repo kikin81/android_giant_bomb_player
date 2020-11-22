@@ -12,7 +12,7 @@ import us.kikin.apps.android.bgplayer.network.NetworkService
 object NetworkModule {
 
     @Provides
-    fun provideNetworkService() : NetworkService {
+    fun provideNetworkService(): NetworkService {
 
         return Retrofit.Builder()
             .baseUrl("https://www.giantbomb.com/api/")

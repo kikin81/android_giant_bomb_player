@@ -1,21 +1,16 @@
 package us.kikin.apps.android.bgplayer.ui.videos
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import us.kikin.apps.android.bgplayer.R
-
 import us.kikin.apps.android.bgplayer.ui.videos.dummy.DummyContent.DummyItem
 
-/**
- * [RecyclerView.Adapter] that can display a [DummyItem].
- * TODO: Replace the implementation with code for your data type.
- */
 class VideoAdapter(
-    private val values: List<DummyItem>)
-    : RecyclerView.Adapter<VideoAdapter.ViewHolder>() {
+    private val values: List<DummyItem>
+) : RecyclerView.Adapter<VideoAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
