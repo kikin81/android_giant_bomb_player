@@ -13,6 +13,9 @@
         <action
             android:id="@+id/videoDetailAction"
             app:destination="@id/videoDetailFragment" />
+        <action
+            android:id="@+id/videoShowAction"
+            app:destination="@id/showListFragment" />
     </fragment>
     <fragment
         android:id="@+id/videoDetailFragment"
@@ -21,6 +24,15 @@
         tools:layout="@layout/fragment_video_detail">
         <argument
             android:name="videoId"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/showListFragment"
+        android:name="us.kikin.apps.android.bgplayer.ui.show.ShowListFragment"
+        android:label="@string/video_show_title"
+        tools:layout="@layout/fragment_show" >
+        <argument
+            android:name="showId"
             app:argType="long" />
     </fragment>
 </navigation>
