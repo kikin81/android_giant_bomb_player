@@ -10,7 +10,8 @@ data class VideoModel(
     val length: Long,
     val thumbnailUrl: String,
     val description: String,
-    val publishedDate: Date
+    val publishedDate: Date,
+    val showModel: VideoShowModel?
 ) {
     constructor(dto: VideoDto) :
         this(
@@ -19,7 +20,12 @@ data class VideoModel(
             dto.length,
             dto.imageDto.screenUrl,
             dto.description,
-            dto.publishedDate
+            dto.publishedDate,
+            if (dto.videoShow != null) {
+                VideoShowModel(dto.videoShow)
+            } else {
+                null
+            }
         )
 
     val publishedRelativeDay: String by lazy {
