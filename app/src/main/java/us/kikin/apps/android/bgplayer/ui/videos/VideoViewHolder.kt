@@ -15,7 +15,7 @@ class VideoViewHolder(
     companion object {
         fun from(parent: ViewGroup): VideoViewHolder {
             val inflater = LayoutInflater.from(parent.context)
-            val binding = ItemVideoBinding.inflate(inflater)
+            val binding = ItemVideoBinding.inflate(inflater, parent, false)
             return VideoViewHolder(binding)
         }
     }

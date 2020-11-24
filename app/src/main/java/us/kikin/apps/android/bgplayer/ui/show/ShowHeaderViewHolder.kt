@@ -13,7 +13,7 @@ class ShowHeaderViewHolder(
     companion object {
         fun from(parent: ViewGroup): ShowHeaderViewHolder {
             val inflater = LayoutInflater.from(parent.context)
-            val binding = ItemShowHeaderBinding.inflate(inflater)
+            val binding = ItemShowHeaderBinding.inflate(inflater, parent, false)
             return ShowHeaderViewHolder(binding)
         }
     }
