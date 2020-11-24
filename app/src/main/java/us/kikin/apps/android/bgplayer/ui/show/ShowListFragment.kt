@@ -27,7 +27,7 @@ class ShowListFragment : Fragment(), VideoItemClickListener, ShowItemClickListen
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentShowBinding.inflate(inflater, container, false)
-
+        val view = binding.root
         adapter = ShowAdapter(this, this)
         binding.recyclerView.adapter = adapter
 
