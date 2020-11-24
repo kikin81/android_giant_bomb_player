@@ -7,8 +7,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import us.kikin.apps.android.bgplayer.models.ShowModel
 import us.kikin.apps.android.bgplayer.models.VideoModel
-import us.kikin.apps.android.bgplayer.models.VideoShowModel
 import us.kikin.apps.android.bgplayer.ui.videos.VideoItemClickListener
 import us.kikin.apps.android.bgplayer.ui.videos.VideoViewHolder
 import us.kikin.apps.android.bgplayer.util.exhaustive
@@ -54,7 +54,7 @@ class ShowAdapter(
         }
     }
 
-    fun addHeaderAndSubmitList(show: VideoShowModel, newItems: List<VideoModel>) {
+    fun addHeaderAndSubmitList(show: ShowModel, newItems: List<VideoModel>) {
         adapterScope.launch {
             val items = when (newItems) {
                 null -> listOf(ShowItem.Header(show))

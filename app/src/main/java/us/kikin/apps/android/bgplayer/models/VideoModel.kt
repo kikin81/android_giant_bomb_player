@@ -13,7 +13,7 @@ data class VideoModel(
     val thumbnailUrl: String,
     val description: String,
     val publishedDate: Date,
-    val showModel: VideoShowModel?,
+    val showModel: ShowModel?,
     val hdUrl: String
 ) {
     constructor(dto: VideoDto) :
@@ -25,7 +25,7 @@ data class VideoModel(
             dto.description,
             dto.publishedDate,
             if (dto.videoShow != null) {
-                VideoShowModel(dto.videoShow)
+                ShowModel(dto.videoShow)
             } else {
                 null
             },

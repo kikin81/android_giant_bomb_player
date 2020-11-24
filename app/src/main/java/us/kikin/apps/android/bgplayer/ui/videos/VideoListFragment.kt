@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.IllegalStateException
 import us.kikin.apps.android.bgplayer.databinding.FragmentVideoListBinding
-import us.kikin.apps.android.bgplayer.models.VideoShowModel
+import us.kikin.apps.android.bgplayer.models.ShowModel
 
 @AndroidEntryPoint
 class VideoListFragment : Fragment(), VideoItemClickListener {
@@ -59,7 +59,7 @@ class VideoListFragment : Fragment(), VideoItemClickListener {
         findNavController().navigate(action)
     }
 
-    override fun onVideoShowClicked(showModel: VideoShowModel) {
+    override fun onVideoShowClicked(showModel: ShowModel) {
         val action = VideoListFragmentDirections.videoShowAction(showModel.id, showModel.name)
         findNavController().navigate(action)
     }
