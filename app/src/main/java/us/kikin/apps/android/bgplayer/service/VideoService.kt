@@ -11,7 +11,7 @@ class VideoService : LifecycleService() {
 
         private const val ARG_TITLE = "VIDEO_TITLE_KEY"
         private const val ARG_URI = "VIDEO_URI_KEY"
-        private const val ARG_START_POSITION = "VIDEO_START_POSIION"
+        private const val ARG_START_POSITION = "VIDEO_START_POSITION"
 
         @MainThread
         fun newIntent(
