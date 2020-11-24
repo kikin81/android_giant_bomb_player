@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.IllegalStateException
 import us.kikin.apps.android.bgplayer.databinding.FragmentShowBinding
-import us.kikin.apps.android.bgplayer.models.VideoShowModel
+import us.kikin.apps.android.bgplayer.models.ShowModel
 import us.kikin.apps.android.bgplayer.ui.videos.VideoItemClickListener
 
 @AndroidEntryPoint
@@ -59,7 +59,7 @@ class ShowListFragment : Fragment(), VideoItemClickListener, ShowItemClickListen
         findNavController().navigate(action)
     }
 
-    override fun onVideoShowClicked(showModel: VideoShowModel) {
+    override fun onVideoShowClicked(showModel: ShowModel) {
         throw UnsupportedOperationException("Show Clicked not supported")
     }
 

@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import us.kikin.apps.android.bgplayer.databinding.ItemShowHeaderBinding
-import us.kikin.apps.android.bgplayer.models.VideoShowModel
+import us.kikin.apps.android.bgplayer.models.ShowModel
 
 class ShowHeaderViewHolder(
     private val binding: ItemShowHeaderBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: VideoShowModel, showClickListener: ShowItemClickListener) {
+    fun bind(item: ShowModel, showClickListener: ShowItemClickListener) {
         with(binding) {
             showName.text = item.name
             showThumbnail.load(item.imageUrl) { crossfade(true) }

@@ -7,7 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import us.kikin.apps.android.bgplayer.models.VideoShowModel
+import us.kikin.apps.android.bgplayer.models.ShowModel
 import us.kikin.apps.android.bgplayer.repository.VideoRepository
 
 class ShowViewModel @ViewModelInject constructor(
@@ -25,7 +25,7 @@ class ShowViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             val videos = videoRepository.getVideosForShow(showId)
             val show = videoRepository.getShow(showId).show
-            val foo = ShowDataHolder(videos, VideoShowModel(show))
+            val foo = ShowDataHolder(videos, ShowModel(show))
             videoListLiveData.postValue(foo)
         }
     }

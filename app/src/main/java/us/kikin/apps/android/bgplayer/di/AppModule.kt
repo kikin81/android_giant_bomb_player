@@ -1,10 +1,13 @@
 package us.kikin.apps.android.bgplayer.di
 
+import android.content.Context
+import androidx.room.Room
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 import okhttp3.OkHttpClient
@@ -12,6 +15,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import us.kikin.apps.android.bgplayer.BuildConfig
+import us.kikin.apps.android.bgplayer.db.AppDatabase
 import us.kikin.apps.android.bgplayer.network.VideoService
 
 @Module
@@ -77,4 +81,16 @@ class AppModule {
     @Singleton
     fun provideApiService(retrofit: Retrofit): VideoService =
         retrofit.create(VideoService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideAppDatabase(
+        @ApplicationContext appContext: Context
+    ): AppDatabase {
+        return Room.databaseBuilder(
+            appContext,
+            AppDatabase::class.java,
+            "GiantBombPlayerDatabase"
+        ).build()
+    }
 }
