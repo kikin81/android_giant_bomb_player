@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import java.lang.IllegalStateException
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.IllegalStateException
 import us.kikin.apps.android.bgplayer.databinding.FragmentVideoListBinding
 import us.kikin.apps.android.bgplayer.models.VideoShowModel
 
@@ -17,7 +17,7 @@ import us.kikin.apps.android.bgplayer.models.VideoShowModel
 class VideoListFragment : Fragment(), VideoItemClickListener {
 
     private var _binding: FragmentVideoListBinding? = null
-    private val binding get() = _binding?: throw IllegalStateException("Cannot access binding")
+    private val binding get() = _binding ?: throw IllegalStateException("Cannot access binding")
     private val videoViewModel: VideoViewModel by viewModels()
     private lateinit var adapter: VideoAdapter
 
