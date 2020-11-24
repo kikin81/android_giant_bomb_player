@@ -32,6 +32,9 @@ class VideoViewHolder(
             videoThumbnail.load(item.thumbnailUrl) {
                 crossfade(true)
             }
+            root.setOnClickListener {
+                listener.onVideoClicked(item.id)
+            }
             if (item.showModel != null && shouldShowShowButton) {
                 videoShow.visibility = View.VISIBLE
                 videoShow.text = item.showModel.name

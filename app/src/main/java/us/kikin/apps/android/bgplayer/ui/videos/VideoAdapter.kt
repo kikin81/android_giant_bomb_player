@@ -16,9 +16,6 @@ class VideoAdapter(
     override fun onBindViewHolder(holder: VideoViewHolder, position: Int) {
         val item = videos[position]
         holder.bind(item, listener)
-        holder.itemView.setOnClickListener {
-            listener.onVideoClicked(item.id)
-        }
     }
 
     override fun getItemCount(): Int = videos.size
