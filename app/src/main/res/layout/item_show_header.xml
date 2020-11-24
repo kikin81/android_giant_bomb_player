@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_marginTop="16dp"
     android:layout_marginBottom="16dp"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/show_thumbnail"
@@ -36,7 +36,7 @@
         app:layout_constraintStart_toEndOf="@+id/show_thumbnail"
         app:layout_constraintBottom_toBottomOf="@+id/show_thumbnail"
         style="?attr/borderlessButtonStyle"
-        tools:text="Follow"
+        android:text="@string/follow"
         android:layout_marginStart="6dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

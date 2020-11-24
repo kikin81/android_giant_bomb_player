@@ -27,15 +27,19 @@ class VideoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val publishedView: TextView = view.findViewById(R.id.video_published_date)
     private val showButton: MaterialButton = view.findViewById(R.id.video_show)
 
-    fun bind(item: VideoModel, listener: VideoItemClickListener) {
+    fun bind(
+        item: VideoModel,
+        listener: VideoItemClickListener,
+        shouldShowShowButton: Boolean = true
+    ) {
         titleView.text = item.name
         lengthView.text = item.runtimeDisplay
         publishedView.text = item.publishedRelativeDay
-        if (item.showModel != null) {
+        if (item.showModel != null && shouldShowShowButton) {
             showButton.visibility = View.VISIBLE
             showButton.text = item.showModel.name
             showButton.setOnClickListener {
-                listener.onVideoShowClicked(item.showModel.id)
+                listener.onVideoShowClicked(item.showModel)
             }
         } else {
             showButton.visibility = View.GONE

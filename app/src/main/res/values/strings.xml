@@ -8,6 +8,5 @@
     <!--  Video detail fragment  -->
     <string name="video_detail_title">Video detail</string>
 
-    <!--  Show fragment  -->
-    <string name="video_show_title">Show</string>
+    <string name="follow">Follow</string>
 </resources>

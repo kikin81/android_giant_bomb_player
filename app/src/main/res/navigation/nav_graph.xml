@@ -29,10 +29,16 @@
     <fragment
         android:id="@+id/showListFragment"
         android:name="us.kikin.apps.android.bgplayer.ui.show.ShowListFragment"
-        android:label="@string/video_show_title"
+        android:label="{showName}"
         tools:layout="@layout/fragment_show" >
         <argument
             android:name="showId"
             app:argType="long" />
+        <argument
+            android:name="showName"
+            app:argType="string" />
+        <action
+            android:id="@+id/videoDetailAction"
+            app:destination="@id/videoDetailFragment" />
     </fragment>
 </navigation>

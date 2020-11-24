@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import us.kikin.apps.android.bgplayer.R
+import us.kikin.apps.android.bgplayer.models.VideoShowModel
 
 @AndroidEntryPoint
 class VideoListFragment : Fragment(), VideoItemClickListener {
@@ -50,8 +51,8 @@ class VideoListFragment : Fragment(), VideoItemClickListener {
         findNavController().navigate(action)
     }
 
-    override fun onVideoShowClicked(showId: Long) {
-        val action = VideoListFragmentDirections.videoShowAction(showId)
+    override fun onVideoShowClicked(showModel: VideoShowModel) {
+        val action = VideoListFragmentDirections.videoShowAction(showModel.id, showModel.name)
         findNavController().navigate(action)
     }
 }
