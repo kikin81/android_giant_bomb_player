@@ -1,20 +1,18 @@
 package us.kikin.apps.android.bgplayer.network
 
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class VideoApiHelperImpl @Inject constructor(
-    private val api: VideoApi
+    private val videoService: VideoService
 ) : VideoApiHelper {
-    override suspend fun getVideos() = api.fetchVideos()
+    override suspend fun getVideos() = videoService.fetchVideos()
 
     override suspend fun getVideoById(videoId: Long) =
-        api.fetchVideoById(videoId)
+        videoService.fetchVideoById(videoId)
 
     override suspend fun getVideosForShow(showId: Long) =
-        api.fetchVideosForShow("video_show:$showId")
+        videoService.fetchVideosForShow("video_show:$showId")
 
     override suspend fun getShow(showId: Long): ShowResponse =
-        api.fetchShow(showId)
+        videoService.fetchShow(showId)
 }

@@ -4,7 +4,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface VideoApi {
+interface VideoService {
 
     @GET("videos")
     suspend fun fetchVideos(): VideoResponse
