@@ -8,17 +8,17 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
-import us.kikin.apps.android.bgplayer.R
+import us.kikin.apps.android.bgplayer.databinding.FragmentShowBinding
 import us.kikin.apps.android.bgplayer.models.VideoShowModel
 import us.kikin.apps.android.bgplayer.ui.videos.VideoItemClickListener
 
 @AndroidEntryPoint
 class ShowListFragment : Fragment(), VideoItemClickListener, ShowItemClickListener {
 
+    private var _binding: FragmentShowBinding? = null
+    private val binding get() = _binding!!
     private val viewModel: ShowViewModel by viewModels()
-    private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ShowAdapter
 
     override fun onCreateView(
@@ -26,11 +26,10 @@ class ShowListFragment : Fragment(), VideoItemClickListener, ShowItemClickListen
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_show, container, false)
+        _binding = FragmentShowBinding.inflate(inflater, container, false)
 
-        recyclerView = view.findViewById(R.id.recycler_view)
         adapter = ShowAdapter(this, this)
-        recyclerView.adapter = adapter
+        binding.recyclerView.adapter = adapter
 
         return view
     }
@@ -46,6 +45,11 @@ class ShowListFragment : Fragment(), VideoItemClickListener, ShowItemClickListen
                 )
             }
         )
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     override fun onVideoClicked(videoId: Long) {
