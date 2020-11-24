@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.IllegalStateException
 import us.kikin.apps.android.bgplayer.databinding.FragmentVideoListBinding
 import us.kikin.apps.android.bgplayer.models.VideoShowModel
 
@@ -16,7 +17,9 @@ import us.kikin.apps.android.bgplayer.models.VideoShowModel
 class VideoListFragment : Fragment(), VideoItemClickListener {
 
     private var _binding: FragmentVideoListBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = requireNotNull(_binding) {
+        throw IllegalStateException("Cannot access binding")
+    }
     private val videoViewModel: VideoViewModel by viewModels()
     private lateinit var adapter: VideoAdapter
 
@@ -24,7 +27,7 @@ class VideoListFragment : Fragment(), VideoItemClickListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentVideoListBinding.inflate(inflater, container, false)
         val view = binding.root
 
@@ -46,9 +49,9 @@ class VideoListFragment : Fragment(), VideoItemClickListener {
         )
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
         _binding = null
+        super.onDestroyView()
     }
 
     override fun onVideoClicked(videoId: Long) {

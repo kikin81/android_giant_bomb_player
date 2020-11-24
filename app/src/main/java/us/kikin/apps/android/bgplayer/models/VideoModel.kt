@@ -1,7 +1,9 @@
 package us.kikin.apps.android.bgplayer.models
 
+import android.net.Uri
 import android.text.format.DateUtils
 import java.util.Date
+import us.kikin.apps.android.bgplayer.BuildConfig
 import us.kikin.apps.android.bgplayer.network.VideoDto
 
 data class VideoModel(
@@ -11,7 +13,8 @@ data class VideoModel(
     val thumbnailUrl: String,
     val description: String,
     val publishedDate: Date,
-    val showModel: VideoShowModel?
+    val showModel: VideoShowModel?,
+    val hdUrl: String
 ) {
     constructor(dto: VideoDto) :
         this(
@@ -25,7 +28,8 @@ data class VideoModel(
                 VideoShowModel(dto.videoShow)
             } else {
                 null
-            }
+            },
+            dto.hdUrl
         )
 
     val publishedRelativeDay: String by lazy {
@@ -47,5 +51,10 @@ data class VideoModel(
         } else {
             String.format("%02d:%02d", minutes, seconds)
         }
+    }
+
+    val videoUri: Uri by lazy {
+        val url = "$hdUrl?api_key=${BuildConfig.ApiKey}"
+        Uri.parse(url)
     }
 }

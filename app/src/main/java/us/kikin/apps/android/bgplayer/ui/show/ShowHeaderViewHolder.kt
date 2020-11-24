@@ -10,23 +10,20 @@ import us.kikin.apps.android.bgplayer.models.VideoShowModel
 class ShowHeaderViewHolder(
     private val binding: ItemShowHeaderBinding
 ) : RecyclerView.ViewHolder(binding.root) {
+
+    fun bind(item: VideoShowModel, showClickListener: ShowItemClickListener) {
+        with(binding) {
+            showName.text = item.name
+            showThumbnail.load(item.imageUrl) { crossfade(true) }
+            showFollowButton.setOnClickListener { showClickListener.onFollowShowClicked(item.id) }
+        }
+    }
+
     companion object {
         fun from(parent: ViewGroup): ShowHeaderViewHolder {
             val inflater = LayoutInflater.from(parent.context)
             val binding = ItemShowHeaderBinding.inflate(inflater, parent, false)
             return ShowHeaderViewHolder(binding)
-        }
-    }
-
-    fun bind(item: VideoShowModel, showClickListener: ShowItemClickListener) {
-        with(binding) {
-            showName.text = item.name
-            showThumbnail.load(item.imageUrl) {
-                crossfade(true)
-            }
-            showFollowButton.setOnClickListener {
-                showClickListener.onFollowShowClicked(item.id)
-            }
         }
     }
 }
