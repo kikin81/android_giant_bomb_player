@@ -77,7 +77,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideApiService(retrofit: Retrofit) =
+    fun provideApiService(retrofit: Retrofit): VideoApi =
         retrofit.create(VideoApi::class.java)
 
     @Provides

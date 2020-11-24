@@ -11,4 +11,10 @@ class VideoApiHelperImpl @Inject constructor(
 
     override suspend fun getVideoById(videoId: Long) =
         api.fetchVideoById(videoId)
+
+    override suspend fun getVideosForShow(showId: Long) =
+        api.fetchVideosForShow("video_show:$showId")
+
+    override suspend fun getShow(showId: Long): ShowResponse =
+        api.fetchShow(showId)
 }
