@@ -24,7 +24,7 @@ class VideoListFragment : Fragment(), VideoItemClickListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentVideoListBinding.inflate(inflater, container, false)
         val view = binding.root
 
@@ -46,9 +46,9 @@ class VideoListFragment : Fragment(), VideoItemClickListener {
         )
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
         _binding = null
+        super.onDestroy()
     }
 
     override fun onVideoClicked(videoId: Long) {

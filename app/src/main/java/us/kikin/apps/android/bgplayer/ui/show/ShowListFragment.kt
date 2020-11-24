@@ -25,7 +25,7 @@ class ShowListFragment : Fragment(), VideoItemClickListener, ShowItemClickListen
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentShowBinding.inflate(inflater, container, false)
         adapter = ShowAdapter(this, this)
         binding.recyclerView.adapter = adapter
@@ -46,9 +46,9 @@ class ShowListFragment : Fragment(), VideoItemClickListener, ShowItemClickListen
         )
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
         _binding = null
+        super.onDestroyView()
     }
 
     override fun onVideoClicked(videoId: Long) {

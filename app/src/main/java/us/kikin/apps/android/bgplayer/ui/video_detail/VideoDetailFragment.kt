@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import coil.load
+import com.google.android.exoplayer2.C.WAKE_MODE_NETWORK
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,6 +22,8 @@ class VideoDetailFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: VideoDetailViewModel by viewModels()
     private val args: VideoDetailFragmentArgs by navArgs()
+
+    // player
     private lateinit var player: SimpleExoPlayer
     private var playWhenReady = true
     private var currentWindow = 0
@@ -30,7 +33,7 @@ class VideoDetailFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentVideoDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -47,9 +50,9 @@ class VideoDetailFragment : Fragment() {
         )
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
         _binding = null
+        super.onDestroyView()
     }
 
     private fun bindVideo(video: VideoModel) {
