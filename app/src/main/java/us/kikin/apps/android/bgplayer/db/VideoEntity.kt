@@ -9,10 +9,10 @@ import java.util.Date
 data class VideoEntity(
     @PrimaryKey val id: Long,
     @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "duration" ) val duration: Long,
-    @ColumnInfo(name = "thumbnail_url" ) val thumbnailUrl: String,
-    @ColumnInfo(name = "description" ) val description: String,
-    @ColumnInfo(name = "publish_date" ) val publishedDate: Date,
-    @ColumnInfo(name = "hd_url" ) val hdUrl: String,
-    @ColumnInfo(name = "show_id" ) val showId: Long?,
+    @ColumnInfo(name = "duration") val duration: Long,
+    @ColumnInfo(name = "thumbnail_url") val thumbnailUrl: String,
+    @ColumnInfo(name = "description") val description: String,
+    @ColumnInfo(name = "publish_date") val publishedDate: Date,
+    @ColumnInfo(name = "hd_url") val hdUrl: String,
+    @ColumnInfo(name = "show_id") val showId: Long?,
 )

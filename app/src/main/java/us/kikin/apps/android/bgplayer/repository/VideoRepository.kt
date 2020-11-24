@@ -1,8 +1,8 @@
 package us.kikin.apps.android.bgplayer.repository
 
-import us.kikin.apps.android.bgplayer.db.VideoDao
 import javax.inject.Inject
 import javax.inject.Singleton
+import us.kikin.apps.android.bgplayer.db.VideoDao
 import us.kikin.apps.android.bgplayer.models.VideoModel
 import us.kikin.apps.android.bgplayer.network.VideoApiHelper
 
