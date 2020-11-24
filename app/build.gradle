@@ -76,6 +76,8 @@ dependencies {
     // image loading
     implementation "io.coil-kt:coil:$coil_version"
 
+    // exo player
+    implementation "com.google.android.exoplayer:exoplayer:$exoplayer_version"
 
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
