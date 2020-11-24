@@ -9,7 +9,7 @@ import us.kikin.apps.android.bgplayer.network.VideoDto
 data class VideoModel(
     val id: Long,
     val name: String,
-    val length: Long,
+    val durationSeconds: Long,
     val thumbnailUrl: String,
     val description: String,
     val publishedDate: Date,
@@ -20,7 +20,7 @@ data class VideoModel(
         this(
             dto.id,
             dto.name,
-            dto.length,
+            dto.durationSeconds,
             dto.imageDto.screenUrl,
             dto.description,
             dto.publishedDate,
@@ -42,9 +42,9 @@ data class VideoModel(
     }
 
     val runtimeDisplay: String by lazy {
-        val hours = length / 3600
-        val minutes = (length % 3600) / 60
-        val seconds = length % 60
+        val hours = durationSeconds / 3600
+        val minutes = (durationSeconds % 3600) / 60
+        val seconds = durationSeconds % 60
 
         if (hours > 0) {
             String.format("%d:%02d:%02d", hours, minutes, seconds)
