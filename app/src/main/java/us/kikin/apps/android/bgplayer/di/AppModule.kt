@@ -12,9 +12,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import us.kikin.apps.android.bgplayer.BuildConfig
-import us.kikin.apps.android.bgplayer.network.VideoApi
-import us.kikin.apps.android.bgplayer.network.VideoApiHelper
-import us.kikin.apps.android.bgplayer.network.VideoApiHelperImpl
+import us.kikin.apps.android.bgplayer.network.VideoService
 
 @Module
 @InstallIn(ApplicationComponent::class)
@@ -77,11 +75,6 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideApiService(retrofit: Retrofit): VideoApi =
-        retrofit.create(VideoApi::class.java)
-
-    @Provides
-    @Singleton
-    fun provideVideoHelper(videoHelper: VideoApiHelperImpl): VideoApiHelper =
-        videoHelper
+    fun provideApiService(retrofit: Retrofit): VideoService =
+        retrofit.create(VideoService::class.java)
 }
