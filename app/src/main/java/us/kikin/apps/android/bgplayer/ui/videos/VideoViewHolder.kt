@@ -26,9 +26,9 @@ class VideoViewHolder(
         shouldShowShowButton: Boolean = true
     ) {
         with(binding) {
-            binding.videoTitle.text = item.name
-            binding.videoLength.text = item.runtimeDisplay
-            binding.videoPublishedDate.text = item.publishedRelativeDay
+            videoTitle.text = item.name
+            videoLength.text = item.runtimeDisplay
+            videoPublishedDate.text = item.publishedRelativeDay
             videoThumbnail.load(item.thumbnailUrl) {
                 crossfade(true)
             }
