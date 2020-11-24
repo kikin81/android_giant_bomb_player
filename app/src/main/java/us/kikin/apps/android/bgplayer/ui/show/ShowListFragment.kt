@@ -18,7 +18,9 @@ import us.kikin.apps.android.bgplayer.ui.videos.VideoItemClickListener
 class ShowListFragment : Fragment(), VideoItemClickListener, ShowItemClickListener {
 
     private var _binding: FragmentShowBinding? = null
-    private val binding get() = _binding ?: throw IllegalStateException("Cannot access binding")
+    private val binding get() = requireNotNull(_binding) {
+        throw IllegalStateException("Cannot access binding")
+    }
     private val viewModel: ShowViewModel by viewModels()
     private lateinit var adapter: ShowAdapter
 

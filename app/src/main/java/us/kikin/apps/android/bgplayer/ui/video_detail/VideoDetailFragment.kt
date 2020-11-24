@@ -19,7 +19,9 @@ import us.kikin.apps.android.bgplayer.models.VideoModel
 class VideoDetailFragment : Fragment() {
 
     private var _binding: FragmentVideoDetailBinding? = null
-    private val binding get() = _binding ?: throw IllegalStateException("Cannot access binding")
+    private val binding get() = requireNotNull(_binding) {
+        throw IllegalStateException("Cannot access binding")
+    }
     private val viewModel: VideoDetailViewModel by viewModels()
     private val args: VideoDetailFragmentArgs by navArgs()
 

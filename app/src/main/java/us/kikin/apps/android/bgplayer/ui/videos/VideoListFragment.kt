@@ -17,7 +17,9 @@ import us.kikin.apps.android.bgplayer.models.VideoShowModel
 class VideoListFragment : Fragment(), VideoItemClickListener {
 
     private var _binding: FragmentVideoListBinding? = null
-    private val binding get() = _binding ?: throw IllegalStateException("Cannot access binding")
+    private val binding get() = requireNotNull(_binding) {
+        throw IllegalStateException("Cannot access binding")
+    }
     private val videoViewModel: VideoViewModel by viewModels()
     private lateinit var adapter: VideoAdapter
 
