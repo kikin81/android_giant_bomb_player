@@ -15,7 +15,7 @@ sealed class ShowItem {
     }
 }
 
-data class Foo(
+data class ShowDataHolder(
     val videos: List<VideoModel>,
     val show: VideoShowModel
 )

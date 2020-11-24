@@ -18,13 +18,14 @@ class ShowViewModel @ViewModelInject constructor(
     // TODO: https://issuetracker.google.com/issues/136967621
     private val showId: Long = savedStateHandle["showId"]
         ?: throw IllegalArgumentException("Show ID required")
-    val videoListLiveData = MutableLiveData<Foo>()
+    val videoListLiveData = MutableLiveData<ShowDataHolder>()
 
     init {
+        // TODO: Use MediatorLiveData to combine multiple live data objects
         viewModelScope.launch {
             val videos = videoRepository.getVideosForShow(showId)
             val show = videoRepository.getShow(showId).show
-            val foo = Foo(videos, VideoShowModel(show))
+            val foo = ShowDataHolder(videos, VideoShowModel(show))
             videoListLiveData.postValue(foo)
         }
     }
