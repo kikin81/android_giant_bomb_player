@@ -48,7 +48,7 @@ class VideoListFragment : Fragment(), VideoItemClickListener {
 
     override fun onDestroyView() {
         _binding = null
-        super.onDestroy()
+        super.onDestroyView()
     }
 
     override fun onVideoClicked(videoId: Long) {
