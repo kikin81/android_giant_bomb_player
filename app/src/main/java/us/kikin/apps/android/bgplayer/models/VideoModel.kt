@@ -14,7 +14,8 @@ data class VideoModel(
     val description: String,
     val publishedDate: Date,
     val showModel: ShowModel?,
-    val hdUrl: String
+    val hdUrl: String,
+    val user: String?
 ) {
     constructor(dto: VideoDto) :
         this(
@@ -29,16 +30,22 @@ data class VideoModel(
             } else {
                 null
             },
-            dto.hdUrl
+            dto.hdUrl,
+            dto.user
         )
 
-    val publishedRelativeDay: String by lazy {
+    val publishedInfoDisplay: String by lazy {
         val now = System.currentTimeMillis()
-        DateUtils.getRelativeTimeSpanString(
+        val relativeDate = DateUtils.getRelativeTimeSpanString(
             publishedDate.time,
             now,
             DateUtils.MINUTE_IN_MILLIS
-        ).toString()
+        )
+        if (user != null) {
+            "$relativeDate by $user"
+        } else {
+            relativeDate.toString()
+        }
     }
 
     val runtimeDisplay: String by lazy {

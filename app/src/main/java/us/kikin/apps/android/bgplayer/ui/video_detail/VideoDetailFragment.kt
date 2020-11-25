@@ -57,7 +57,7 @@ class VideoDetailFragment : Fragment() {
     private fun bindVideo(video: VideoModel) {
         binding.videoTitle.text = video.name
         binding.videoDescription.text = video.description
-        binding.videoPublishedDate.text = video.publishedRelativeDay
+        binding.videoPublishedDate.text = video.publishedInfoDisplay
         binding.videoThumbnail.load(video.thumbnailUrl) { crossfade(true) }
         initializePlayer(video)
     }

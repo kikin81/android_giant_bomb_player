@@ -1,8 +1,8 @@
 package us.kikin.apps.android.bgplayer.ui.videos
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import us.kikin.apps.android.bgplayer.databinding.ItemVideoBinding
@@ -20,7 +20,7 @@ class VideoViewHolder(
         with(binding) {
             videoTitle.text = item.name
             videoLength.text = item.runtimeDisplay
-            videoPublishedDate.text = item.publishedRelativeDay
+            videoPublishedDate.text = item.publishedInfoDisplay
             videoThumbnail.load(item.thumbnailUrl) {
                 crossfade(true)
             }
@@ -28,14 +28,12 @@ class VideoViewHolder(
                 listener.onVideoClicked(item.id)
             }
             if (item.showModel != null && shouldShowShowButton) {
-                videoShow.visibility = View.VISIBLE
                 videoShow.text = item.showModel.name
                 videoShow.setOnClickListener {
                     listener.onVideoShowClicked(item.showModel)
                 }
-            } else {
-                videoShow.visibility = View.GONE
             }
+            videoShow.isVisible = item.showModel != null && shouldShowShowButton
         }
     }
 
