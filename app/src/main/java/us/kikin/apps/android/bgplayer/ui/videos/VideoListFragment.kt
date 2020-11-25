@@ -6,9 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.lang.IllegalStateException
 import us.kikin.apps.android.bgplayer.databinding.FragmentVideoListBinding
 import us.kikin.apps.android.bgplayer.models.ShowModel
@@ -17,10 +21,11 @@ import us.kikin.apps.android.bgplayer.models.ShowModel
 class VideoListFragment : Fragment(), VideoItemClickListener {
 
     private var _binding: FragmentVideoListBinding? = null
+    private var videoJob: Job? = null
     private val binding get() = requireNotNull(_binding) {
         throw IllegalStateException("Cannot access binding")
     }
-    private val videoViewModel: VideoViewModel by viewModels()
+    private val viewModel: VideoViewModel by viewModels()
     private lateinit var adapter: VideoAdapter
 
     override fun onCreateView(
@@ -41,12 +46,16 @@ class VideoListFragment : Fragment(), VideoItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        videoViewModel.videoListLiveData.observe(
-            viewLifecycleOwner,
-            {
-                adapter.updateItems(it)
+        getLatestVideos()
+    }
+
+    private fun getLatestVideos() {
+        videoJob?.cancel()
+        videoJob = lifecycleScope.launch {
+            viewModel.getLatestVideos().collectLatest {
+                adapter.submitData(it)
             }
-        )
+        }
     }
 
     override fun onDestroyView() {
