@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
@@ -16,6 +18,7 @@ import kotlinx.coroutines.launch
 import us.kikin.apps.android.bgplayer.databinding.FragmentShowBinding
 import us.kikin.apps.android.bgplayer.models.ShowModel
 import us.kikin.apps.android.bgplayer.ui.videos.VideoItemClickListener
+import us.kikin.apps.android.bgplayer.ui.videos.VideoLoadStateAdapter
 
 @AndroidEntryPoint
 class ShowListFragment : Fragment(), VideoItemClickListener, ShowItemClickListener {
@@ -43,7 +46,26 @@ class ShowListFragment : Fragment(), VideoItemClickListener, ShowItemClickListen
     }
 
     private fun initAdapter() {
-        binding.recyclerView.adapter = adapter
+        // binding.recyclerView.adapter = adapter
+        binding.recyclerView.adapter = adapter.withLoadStateFooter(
+            footer = VideoLoadStateAdapter()
+        )
+        adapter.addLoadStateListener { loadState ->
+            binding.recyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
+            binding.listProgress.isVisible = loadState.source.refresh is LoadState.Loading
+
+            val errorState = loadState.source.append as? LoadState.Error
+                ?: loadState.source.prepend as? LoadState.Error
+                ?: loadState.append as? LoadState.Error
+                ?: loadState.prepend as? LoadState.Error
+            errorState?.let {
+                Toast.makeText(
+                    requireContext(),
+                    "\uD83D\uDE28 Whoops ${it.error}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
     }
 
     private fun getVideosForShow(showModel: ShowModel) {
