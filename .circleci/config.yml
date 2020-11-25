@@ -23,41 +23,41 @@ jobs:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 
-tests:
-  working_directory: ~/code
-  executor: android/android
-  steps:
-    - checkout
-    - restore_cache:
-        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-    - store_artifacts:
-        path: app/build/reports
-        destination: reports
-    - run:
-        name: Run Lint Test
-        command: ./gradlew lint -Pgiant_bomb_api_key=$GB_API_KEY
-    - run:
-        name: Run Tests
-        command: ./gradlew lint test -Pgiant_bomb_api_key=$GB_API_KEY
-    - store_artifacts:
-        path: app/build/reports
-        destination: reports
-    - store_test_results:
-        path: app/build/test-results
+  tests:
+    working_directory: ~/code
+    executor: android/android
+    steps:
+      - checkout
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - store_artifacts:
+          path: app/build/reports
+          destination: reports
+      - run:
+          name: Run Lint Test
+          command: ./gradlew lint -Pgiant_bomb_api_key=$GB_API_KEY
+      - run:
+          name: Run Tests
+          command: ./gradlew lint test -Pgiant_bomb_api_key=$GB_API_KEY
+      - store_artifacts:
+          path: app/build/reports
+          destination: reports
+      - store_test_results:
+          path: app/build/test-results
 
-ktlinter:
-  working_directory: ~/code
-  executor: android/android
-  steps:
-    - checkout
-    - restore_cache:
-        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-    - store_artifacts:
-        path: app/build/reports
-        destination: reports
-    - run:
-        name: Run Ktlint
-        command: ./gradlew ktlintCheck -Pgiant_bomb_api_key=$GB_API_KEY
+  ktlinter:
+    working_directory: ~/code
+    executor: android/android
+    steps:
+      - checkout
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - store_artifacts:
+          path: app/build/reports
+          destination: reports
+      - run:
+          name: Run Ktlint
+          command: ./gradlew ktlintCheck -Pgiant_bomb_api_key=$GB_API_KEY
 
 workflows:
   version: 2
