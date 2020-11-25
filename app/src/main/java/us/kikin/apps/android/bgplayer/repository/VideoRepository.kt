@@ -6,9 +6,9 @@ import androidx.paging.PagingData
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.flow.Flow
+import us.kikin.apps.android.bgplayer.data.ShowPagingSource
 import us.kikin.apps.android.bgplayer.data.VideoPagingSource
 import us.kikin.apps.android.bgplayer.models.VideoModel
-import us.kikin.apps.android.bgplayer.network.IN_SHOW_QUALIFIER
 import us.kikin.apps.android.bgplayer.network.VideoService
 
 @Singleton
@@ -26,14 +26,20 @@ class VideoRepository @Inject constructor(
         ).flow
     }
 
+    fun getVideosForShowStream(showId: Long): Flow<PagingData<VideoModel>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = NETWORK_PAGE_SIZE,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = { ShowPagingSource(showId, videoService) }
+        ).flow
+    }
+
     suspend fun getVideoById(videoId: Long): VideoModel {
         val response = videoService.fetchVideoById(videoId).video
         return VideoModel(response)
     }
-
-    suspend fun getVideosForShow(showId: Long) =
-        videoService.fetchVideosForShow("$IN_SHOW_QUALIFIER$showId", 0, 0)
-            .videos.map { VideoModel(it) }
 
     suspend fun getShow(showId: Long) =
         videoService.fetchShow(showId)

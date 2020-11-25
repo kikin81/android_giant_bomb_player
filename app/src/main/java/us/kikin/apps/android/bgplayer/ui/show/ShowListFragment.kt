@@ -7,8 +7,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import us.kikin.apps.android.bgplayer.databinding.FragmentShowBinding
 import us.kikin.apps.android.bgplayer.models.ShowModel
 import us.kikin.apps.android.bgplayer.ui.videos.VideoItemClickListener
@@ -18,8 +22,9 @@ class ShowListFragment : Fragment(), VideoItemClickListener, ShowItemClickListen
 
     private var _binding: FragmentShowBinding? = null
     private val binding get() = requireNotNull(_binding)
+    private var showJob: Job? = null
     private val viewModel: ShowViewModel by viewModels()
-    private lateinit var adapter: ShowAdapter
+    private val adapter = ShowAdapter(this, this)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,23 +32,27 @@ class ShowListFragment : Fragment(), VideoItemClickListener, ShowItemClickListen
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentShowBinding.inflate(inflater, container, false)
-        adapter = ShowAdapter(this, this)
-        binding.recyclerView.adapter = adapter
+        initAdapter()
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.videoListLiveData.observe(
-            viewLifecycleOwner,
-            {
-                adapter.addHeaderAndSubmitList(
-                    it.show,
-                    it.videos
-                )
+        viewModel.showLiveData.observe(viewLifecycleOwner, { getVideosForShow(it) })
+    }
+
+    private fun initAdapter() {
+        binding.recyclerView.adapter = adapter
+    }
+
+    private fun getVideosForShow(showModel: ShowModel) {
+        showJob?.cancel()
+        showJob = lifecycleScope.launch {
+            viewModel.getVideosForShow(showModel).collectLatest {
+                adapter.submitData(it)
             }
-        )
+        }
     }
 
     override fun onDestroyView() {

@@ -17,7 +17,7 @@ class ShowPagingSource(
 
         return try {
             val response = videoService.fetchVideosForShow(
-                filter = "$IN_SHOW_QUALIFIER:$showId",
+                filter = "$IN_SHOW_QUALIFIER$showId",
                 offset = offset,
                 limit = PAGE_SIZE
             )
