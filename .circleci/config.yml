@@ -1,13 +1,73 @@
 version: 2.1
 
+# When using gradlew, need to insert gradle property for api key
+# -Pgiant_bomb_api_key=$GB_API_KEY
+
 orbs:
-  android: circleci/android@0.2.1
+  android: circleci/android@0.2.3
 
 jobs:
   build:
+    working_directory: ~/code
     executor: android/android
 
     steps:
       - checkout
+      - restore_cache:
+            key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
-          command: ./gradlew build -Pgiant_bomb_api_key=$GB_API_KEY
+          name: Download Dependencies
+          command: ./gradlew androidDependencies -Pgiant_bomb_api_key=$GB_API_KEY
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+
+tests:
+  working_directory: ~/code
+  executor: android/android
+  steps:
+    - checkout
+    - restore_cache:
+        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+    - store_artifacts:
+        path: app/build/reports
+        destination: reports
+    - run:
+        name: Run Lint Test
+        command: ./gradlew lint -Pgiant_bomb_api_key=$GB_API_KEY
+    - run:
+        name: Run Tests
+        command: ./gradlew lint test -Pgiant_bomb_api_key=$GB_API_KEY
+    - store_artifacts:
+        path: app/build/reports
+        destination: reports
+    - store_test_results:
+        path: app/build/test-results
+
+kotlinStyle:
+  working_directory: ~/code
+  executor: android/android
+  steps:
+    - checkout
+    - restore_cache:
+        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+    - store_artifacts:
+        path: app/build/reports
+        destination: reports
+    - run:
+        name: Run Ktlint
+        command: ./gradlew ktlintCheck -Pgiant_bomb_api_key=$GB_API_KEY
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - build
+      - kotlinStyle:
+          requires:
+            - build
+      - tests:
+          requires:
+            - build
+            - kotlinStyle
