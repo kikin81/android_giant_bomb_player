@@ -12,14 +12,6 @@ class VideoViewHolder(
     private val binding: ItemVideoBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    companion object {
-        fun from(parent: ViewGroup): VideoViewHolder {
-            val inflater = LayoutInflater.from(parent.context)
-            val binding = ItemVideoBinding.inflate(inflater, parent, false)
-            return VideoViewHolder(binding)
-        }
-    }
-
     fun bind(
         item: VideoModel,
         listener: VideoItemClickListener,
@@ -44,6 +36,14 @@ class VideoViewHolder(
             } else {
                 videoShow.visibility = View.GONE
             }
+        }
+    }
+
+    companion object {
+        fun from(parent: ViewGroup): VideoViewHolder {
+            val inflater = LayoutInflater.from(parent.context)
+            val binding = ItemVideoBinding.inflate(inflater, parent, false)
+            return VideoViewHolder(binding)
         }
     }
 }
