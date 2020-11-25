@@ -4,24 +4,26 @@ import javax.inject.Inject
 import javax.inject.Singleton
 import us.kikin.apps.android.bgplayer.db.VideoDao
 import us.kikin.apps.android.bgplayer.models.VideoModel
-import us.kikin.apps.android.bgplayer.network.VideoApiHelper
+import us.kikin.apps.android.bgplayer.network.IN_SHOW_QUALIFIER
+import us.kikin.apps.android.bgplayer.network.VideoService
 
 @Singleton
 class VideoRepository @Inject constructor(
-    private val videoApiHelper: VideoApiHelper,
+    private val videoService: VideoService,
     private val videoDao: VideoDao
 ) {
     suspend fun getVideos() =
-        videoApiHelper.getVideos().videos.map { VideoModel(it) }
+        videoService.fetchVideos(0, 50).videos.map { VideoModel(it) }
 
     suspend fun getVideoById(videoId: Long): VideoModel {
-        val response = videoApiHelper.getVideoById(videoId).video
+        val response = videoService.fetchVideoById(videoId).video
         return VideoModel(response)
     }
 
     suspend fun getVideosForShow(showId: Long) =
-        videoApiHelper.getVideosForShow(showId).videos.map { VideoModel(it) }
+        videoService.fetchVideosForShow("$IN_SHOW_QUALIFIER$showId")
+            .videos.map { VideoModel(it) }
 
     suspend fun getShow(showId: Long) =
-        videoApiHelper.getShow(showId)
+        videoService.fetchShow(showId)
 }
