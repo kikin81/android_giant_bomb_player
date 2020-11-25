@@ -25,7 +25,9 @@ interface VideoService {
 
     @GET("videos")
     suspend fun fetchVideosForShow(
-        @Query("filter") filter: String
+        @Query("filter") filter: String,
+        @Query("offset") offset: Int,
+        @Query("limit") limit: Int
     ): VideoResponse
 
     @GET("video_show/{show_id}")

@@ -6,7 +6,7 @@ import android.net.Uri
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleService
 
-class VideoService : LifecycleService() {
+class PlayerService : LifecycleService() {
     companion object {
 
         private const val ARG_TITLE = "VIDEO_TITLE_KEY"
@@ -19,7 +19,7 @@ class VideoService : LifecycleService() {
             title: String,
             uriString: String,
             startPosition: Long
-        ) = Intent(context, VideoService::class.java).apply {
+        ) = Intent(context, PlayerService::class.java).apply {
             putExtra(ARG_TITLE, title)
             putExtra(ARG_URI, Uri.parse(uriString))
             putExtra(ARG_START_POSITION, startPosition)
