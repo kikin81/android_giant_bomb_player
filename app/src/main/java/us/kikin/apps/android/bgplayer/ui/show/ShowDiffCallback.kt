@@ -2,12 +2,12 @@ package us.kikin.apps.android.bgplayer.ui.show
 
 import androidx.recyclerview.widget.DiffUtil
 
-class ShowDiffCallback : DiffUtil.ItemCallback<ShowItem>() {
-    override fun areItemsTheSame(oldItem: ShowItem, newItem: ShowItem): Boolean {
-        return oldItem.id == newItem.id
+class ShowDiffCallback : DiffUtil.ItemCallback<ShowUiModel>() {
+    override fun areItemsTheSame(oldUiModel: ShowUiModel, newUiModel: ShowUiModel): Boolean {
+        return oldUiModel.id == newUiModel.id
     }
 
-    override fun areContentsTheSame(oldItem: ShowItem, newItem: ShowItem): Boolean {
-        return oldItem == newItem
+    override fun areContentsTheSame(oldUiModel: ShowUiModel, newUiModel: ShowUiModel): Boolean {
+        return oldUiModel == newUiModel
     }
 }

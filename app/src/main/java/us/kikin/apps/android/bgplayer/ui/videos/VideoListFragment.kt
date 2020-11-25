@@ -22,8 +22,8 @@ import us.kikin.apps.android.bgplayer.models.ShowModel
 class VideoListFragment : Fragment(), VideoItemClickListener {
 
     private var _binding: FragmentVideoListBinding? = null
-    private var videoJob: Job? = null
     private val binding get() = requireNotNull(_binding)
+    private var videoJob: Job? = null
     private val viewModel: VideoViewModel by viewModels()
     private val adapter = VideoAdapter(this)
 
@@ -57,7 +57,7 @@ class VideoListFragment : Fragment(), VideoItemClickListener {
             errorState?.let {
                 Toast.makeText(
                     requireContext(),
-                    "\uD83D\uDE28 Wooops ${it.error}",
+                    "\uD83D\uDE28 Whoops ${it.error}",
                     Toast.LENGTH_LONG
                 ).show()
             }
