@@ -45,7 +45,7 @@ tests:
     - store_test_results:
         path: app/build/test-results
 
-kotlinStyle:
+ktlinter:
   working_directory: ~/code
   executor: android/android
   steps:
@@ -64,10 +64,10 @@ workflows:
   build-and-test:
     jobs:
       - build
-      - kotlinStyle:
+      - ktlinter:
           requires:
             - build
       - tests:
           requires:
             - build
-            - kotlinStyle
+            - ktlinter
