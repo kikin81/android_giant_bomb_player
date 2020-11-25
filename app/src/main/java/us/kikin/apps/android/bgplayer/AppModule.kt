@@ -1,4 +1,4 @@
-package us.kikin.apps.android.bgplayer.di
+package us.kikin.apps.android.bgplayer
 
 import android.content.Context
 import androidx.room.Room
@@ -14,7 +14,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import us.kikin.apps.android.bgplayer.BuildConfig
 import us.kikin.apps.android.bgplayer.db.AppDatabase
 import us.kikin.apps.android.bgplayer.network.VideoService
 

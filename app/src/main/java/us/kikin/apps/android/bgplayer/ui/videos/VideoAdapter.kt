@@ -1,28 +1,28 @@
 package us.kikin.apps.android.bgplayer.ui.videos
 
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import us.kikin.apps.android.bgplayer.models.VideoModel
 
 class VideoAdapter(
     private val listener: VideoItemClickListener
-) : RecyclerView.Adapter<VideoViewHolder>() {
-
-    private val videos = ArrayList<VideoModel>()
-
+) : PagingDataAdapter<VideoModel, VideoViewHolder>(VIDEO_COMPARATOR) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         VideoViewHolder.from(parent)
 
     override fun onBindViewHolder(holder: VideoViewHolder, position: Int) {
-        val item = videos[position]
+        val item = getItem(position) as VideoModel
         holder.bind(item, listener)
     }
 
-    override fun getItemCount(): Int = videos.size
+    companion object {
+        private val VIDEO_COMPARATOR = object : DiffUtil.ItemCallback<VideoModel>() {
+            override fun areItemsTheSame(oldItem: VideoModel, newItem: VideoModel): Boolean =
+                oldItem.id == newItem.id
 
-    fun updateItems(newItems: List<VideoModel>) {
-        videos.clear()
-        videos.addAll(newItems)
-        notifyDataSetChanged()
+            override fun areContentsTheSame(oldItem: VideoModel, newItem: VideoModel): Boolean =
+                oldItem == newItem
+        }
     }
 }

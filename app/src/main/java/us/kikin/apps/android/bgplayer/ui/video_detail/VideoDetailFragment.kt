@@ -11,7 +11,6 @@ import coil.load
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.IllegalStateException
 import us.kikin.apps.android.bgplayer.databinding.FragmentVideoDetailBinding
 import us.kikin.apps.android.bgplayer.models.VideoModel
 
@@ -19,9 +18,7 @@ import us.kikin.apps.android.bgplayer.models.VideoModel
 class VideoDetailFragment : Fragment() {
 
     private var _binding: FragmentVideoDetailBinding? = null
-    private val binding get() = requireNotNull(_binding) {
-        throw IllegalStateException("Cannot access binding")
-    }
+    private val binding get() = requireNotNull(_binding)
     private val viewModel: VideoDetailViewModel by viewModels()
     private val args: VideoDetailFragmentArgs by navArgs()
 
