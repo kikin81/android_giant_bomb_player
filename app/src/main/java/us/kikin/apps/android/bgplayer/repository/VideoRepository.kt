@@ -41,7 +41,6 @@ class VideoRepository @Inject constructor(
         videoService.fetchShow(showId)
 
     companion object {
-        private const val RESPONSE_OFFSET = 0
         private const val NETWORK_PAGE_SIZE = 50
     }
 }
