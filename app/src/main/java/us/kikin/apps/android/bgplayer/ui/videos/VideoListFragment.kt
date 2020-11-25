@@ -57,7 +57,7 @@ class VideoListFragment : Fragment(), VideoItemClickListener {
             errorState?.let {
                 Toast.makeText(
                     requireContext(),
-                    "\uD83D\uDE28 Wooops ${it.error}",
+                    "\uD83D\uDE28 Whoops ${it.error}",
                     Toast.LENGTH_LONG
                 ).show()
             }

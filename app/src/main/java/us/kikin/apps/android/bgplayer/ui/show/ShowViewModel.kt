@@ -43,7 +43,7 @@ class ShowViewModel @ViewModelInject constructor(
         val newResult: Flow<PagingData<ShowUiModel>> = repository.getVideosForShowStream(showId)
             .map { paging -> paging.map { ShowUiModel.VideoUiModel(it) } }
             .map {
-                it.insertSeparators<ShowUiModel.VideoUiModel, ShowUiModel> { before, _ ->
+                it.insertSeparators { before, _ ->
                     if (before == null) {
                         return@insertSeparators ShowUiModel.Header(showModel)
                     } else {

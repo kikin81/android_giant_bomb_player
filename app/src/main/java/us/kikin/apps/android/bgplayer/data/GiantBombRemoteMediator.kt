@@ -57,6 +57,5 @@ class GiantBombRemoteMediator(
 
     companion object {
         private const val STARTING_OFFSET = 0
-        private const val PAGE_SIZE = 50
     }
 }
