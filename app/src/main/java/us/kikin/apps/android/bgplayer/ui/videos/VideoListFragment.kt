@@ -8,12 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.IllegalStateException
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import java.lang.IllegalStateException
 import us.kikin.apps.android.bgplayer.databinding.FragmentVideoListBinding
 import us.kikin.apps.android.bgplayer.models.ShowModel
 
@@ -40,13 +41,8 @@ class VideoListFragment : Fragment(), VideoItemClickListener {
         adapter = VideoAdapter(this)
         binding.recyclerView.adapter = adapter
 
-        return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
         getLatestVideos()
+        return view
     }
 
     private fun getLatestVideos() {

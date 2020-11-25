@@ -21,7 +21,7 @@ class VideoPagingSource(
             LoadResult.Page(
                 data = videos,
                 prevKey = if (offset == PAGE_OFFSET) null else offset - response.offset,
-                nextKey = if (videos.isEmpty()) null else offset + response.offset
+                nextKey = if (videos.isEmpty()) null else offset + response.videos.size
             )
         } catch (exception: IOException) {
             return LoadResult.Error(exception)

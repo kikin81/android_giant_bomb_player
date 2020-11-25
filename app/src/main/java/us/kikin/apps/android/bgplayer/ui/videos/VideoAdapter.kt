@@ -8,23 +8,12 @@ import us.kikin.apps.android.bgplayer.models.VideoModel
 class VideoAdapter(
     private val listener: VideoItemClickListener
 ) : PagingDataAdapter<VideoModel, VideoViewHolder>(VIDEO_COMPARATOR) {
-
-    private val videos = ArrayList<VideoModel>()
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         VideoViewHolder.from(parent)
 
     override fun onBindViewHolder(holder: VideoViewHolder, position: Int) {
-        val item = videos[position]
+        val item = getItem(position) as VideoModel
         holder.bind(item, listener)
-    }
-
-    override fun getItemCount(): Int = videos.size
-
-    fun updateItems(newItems: List<VideoModel>) {
-        videos.clear()
-        videos.addAll(newItems)
-        notifyDataSetChanged()
     }
 
     companion object {
