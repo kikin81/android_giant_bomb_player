@@ -1,80 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:clickable="true"
-    android:focusable="true"
-    android:layout_width="match_parent"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="4dp"
-    android:layout_height="wrap_content">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="video"
+            type="us.kikin.apps.android.bgplayer.models.VideoModel" />
+        <variable
+            name="handlers"
+            type="us.kikin.apps.android.bgplayer.ui.videos.VideoItemClickListener" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:clickable="true"
+        android:focusable="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_margin="8dp"
+        app:cardCornerRadius="4dp"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> handlers.onVideoClicked(video.id)}">
 
-        <ImageView
-            android:id="@+id/video_thumbnail"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:contentDescription="@string/video_thumbnail_content_description"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintDimensionRatio="H,16:9"
-            app:srcCompat="@mipmap/ic_launcher"
-            android:scaleType="centerCrop"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/video_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textAlignment="viewStart"
-            tools:text="A very long descriptive title here. A very long descriptive title here"
-            app:layout_constraintStart_toStartOf="parent"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/video_thumbnail"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp" />
+            <ImageView
+                android:id="@+id/video_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:contentDescription="@string/video_thumbnail_content_description"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintDimensionRatio="H,16:9"
+                app:srcCompat="@mipmap/ic_launcher"
+                android:scaleType="centerCrop"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/video_published_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/video_title"
-            app:layout_constraintTop_toBottomOf="@+id/video_title"
-            android:textAppearance="?attr/textAppearanceSubtitle1"
-            android:textAlignment="viewStart"
-            android:paddingBottom="16dp"
-            tools:text="5 minutes ago" />
+            <TextView
+                android:id="@+id/video_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="viewStart"
+                tools:text="A very long descriptive title here. A very long descriptive title here"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/video_thumbnail"
+                android:text="@{video.name}"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/video_show"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Quick Looks"
-            style="?attr/materialButtonOutlinedStyle"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/video_published_date" />
+            <TextView
+                android:id="@+id/video_published_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/video_title"
+                app:layout_constraintTop_toBottomOf="@+id/video_title"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:textAlignment="viewStart"
+                android:text="@{video.publishedInfoDisplay}"
+                android:paddingBottom="16dp"
+                tools:text="5 minutes ago" />
 
-        <TextView
-            android:id="@+id/video_length"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="16dp"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:background="@color/black"
-            app:layout_constraintBottom_toBottomOf="@+id/video_thumbnail"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="1:35:22"
-            android:textAppearance="?attr/textAppearanceListItem" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/video_show"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Quick Looks"
+                android:text="@{video.showModel.name}"
+                android:visibility="@{video.showModel != null ? View.VISIBLE : View.GONE}"
+                style="?attr/materialButtonOutlinedStyle"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                android:onClick="@{() -> handlers.onVideoShowClicked(video.showModel)}"
+                app:layout_constraintTop_toBottomOf="@+id/video_published_date" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/video_length"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:background="@color/black"
+                android:text="@{video.runtimeDisplay}"
+                app:layout_constraintBottom_toBottomOf="@+id/video_thumbnail"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="1:35:22"
+                android:textAppearance="?attr/textAppearanceListItem" />
 
-</com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

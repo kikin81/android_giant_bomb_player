@@ -18,20 +18,10 @@ class VideoViewHolder(
         shouldShowShowButton: Boolean = true
     ) {
         with(binding) {
-            videoTitle.text = item.name
-            videoLength.text = item.runtimeDisplay
-            videoPublishedDate.text = item.publishedInfoDisplay
+            video = item
+            handlers = listener
             videoThumbnail.load(item.thumbnailUrl) {
                 crossfade(true)
-            }
-            root.setOnClickListener {
-                listener.onVideoClicked(item.id)
-            }
-            if (item.showModel != null && shouldShowShowButton) {
-                videoShow.text = item.showModel.name
-                videoShow.setOnClickListener {
-                    listener.onVideoShowClicked(item.showModel)
-                }
             }
             videoShow.isVisible = item.showModel != null && shouldShowShowButton
         }
