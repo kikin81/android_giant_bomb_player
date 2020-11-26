@@ -6,10 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.navArgs
 import coil.load
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.SimpleExoPlayer
 import dagger.hilt.android.AndroidEntryPoint
 import us.kikin.apps.android.bgplayer.databinding.FragmentVideoDetailBinding
 import us.kikin.apps.android.bgplayer.models.VideoModel
@@ -20,13 +17,6 @@ class VideoDetailFragment : Fragment() {
     private var _binding: FragmentVideoDetailBinding? = null
     private val binding get() = requireNotNull(_binding)
     private val viewModel: VideoDetailViewModel by viewModels()
-    private val args: VideoDetailFragmentArgs by navArgs()
-
-    // player
-    private lateinit var player: SimpleExoPlayer
-    private var playWhenReady = true
-    private var currentWindow = 0
-    private var playbackPosition: Long = 0L
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,13 +30,8 @@ class VideoDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getVideoById(args.videoId)
-        viewModel.videoLiveData.observe(
-            viewLifecycleOwner,
-            {
-                bindVideo(it)
-            }
-        )
+        viewModel.videoLiveData.observe(viewLifecycleOwner, { bindVideo(it) })
+        viewModel.player.observe(viewLifecycleOwner, { binding.videoView.player = it })
     }
 
     override fun onDestroyView() {
@@ -59,23 +44,5 @@ class VideoDetailFragment : Fragment() {
         binding.videoDescription.text = video.description
         binding.videoPublishedDate.text = video.publishedInfoDisplay
         binding.videoThumbnail.load(video.thumbnailUrl) { crossfade(true) }
-        initializePlayer(video)
-    }
-
-    private fun initializePlayer(video: VideoModel) {
-        player = SimpleExoPlayer.Builder(requireContext()).build()
-        binding.videoView.player = player
-        val mediaItem = MediaItem.fromUri(video.videoUri)
-        player.setMediaItem(mediaItem)
-        player.playWhenReady = playWhenReady
-        player.seekTo(currentWindow, playbackPosition)
-        player.prepare()
-    }
-
-    private fun releasePlayer() {
-        playWhenReady = player.playWhenReady
-        playbackPosition = player.currentPosition
-        currentWindow = player.currentWindowIndex
-        player.release()
     }
 }
