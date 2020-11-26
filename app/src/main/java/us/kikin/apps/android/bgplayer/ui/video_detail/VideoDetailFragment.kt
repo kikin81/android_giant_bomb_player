@@ -40,9 +40,7 @@ class VideoDetailFragment : Fragment() {
     }
 
     private fun bindVideo(video: VideoModel) {
-        binding.videoTitle.text = video.name
-        binding.videoDescription.text = video.description
-        binding.videoPublishedDate.text = video.publishedInfoDisplay
+        binding.video = video
         binding.videoThumbnail.load(video.thumbnailUrl) { crossfade(true) }
     }
 }
