@@ -3,18 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
-    android:layout_marginBottom="16dp"
-    android:layout_height="wrap_content">
+    android:layout_marginBottom="16dp">
 
     <ImageView
         android:id="@+id/show_thumbnail"
         android:layout_width="150dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="H,16:9"
-        android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="parent"
         android:contentDescription="@string/video_thumbnail_content_description"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="H,16:9"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -23,20 +23,20 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/show_thumbnail"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textAppearance="?attr/textAppearanceHeadline6"
         tools:text="Giant Bombcast" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/show_follow_button"
+        style="?attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        app:layout_constraintStart_toEndOf="@+id/show_thumbnail"
-        app:layout_constraintBottom_toBottomOf="@+id/show_thumbnail"
-        style="?attr/borderlessButtonStyle"
+        android:layout_marginStart="6dp"
         android:text="@string/follow"
-        android:layout_marginStart="6dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/show_thumbnail"
+        app:layout_constraintStart_toEndOf="@+id/show_thumbnail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
