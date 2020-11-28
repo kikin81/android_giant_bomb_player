@@ -15,4 +15,9 @@
     <string name="login_title">Login</string>
     <string name="login_code">Enter code</string>
     <string name="login_button">Login</string>
+
+    <!--  menu navigation  -->
+    <string name="latest">Latest</string>
+    <string name="search">Search</string>
+    <string name="shows">Shows</string>
 </resources>
