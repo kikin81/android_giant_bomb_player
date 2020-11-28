@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/latest_feed"
+        android:id="@+id/latest_feed_destination"
         android:icon="@drawable/ic_latest_feed"
         android:title="@string/latest" />
 
     <item
-        android:id="@+id/shows"
+        android:id="@+id/shows_destination"
         android:icon="@drawable/ic_shows"
         android:title="@string/shows" />
 
     <item
-        android:id="@+id/search"
+        android:id="@+id/search_destination"
         android:icon="@drawable/ic_search"
         android:title="@string/search" />
 </menu>

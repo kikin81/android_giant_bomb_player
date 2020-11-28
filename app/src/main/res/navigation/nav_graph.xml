@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/videoListFragment">
+    app:startDestination="@id/latest_feed_destination">
 
     <fragment
-        android:id="@+id/videoListFragment"
+        android:id="@+id/latest_feed_destination"
         android:name="us.kikin.apps.android.bgplayer.ui.videos.VideoListFragment"
         android:label="@string/video_list_title"
         tools:layout="@layout/fragment_video_list">
@@ -45,6 +45,9 @@
         android:id="@+id/loginFragment"
         android:name="us.kikin.apps.android.bgplayer.ui.login.LoginFragment"
         android:label="@string/login_title"
-        tools:layout="@layout/fragment_login">
-    </fragment>
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/search_destination"
+        android:name="us.kikin.apps.android.bgplayer.ui.search.SearchFragment"
+        android:label="SearchFragment" />
 </navigation>
