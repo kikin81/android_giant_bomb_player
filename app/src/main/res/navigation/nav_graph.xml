@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/videoListFragment">
 
     <fragment
         android:id="@+id/videoListFragment"
@@ -46,8 +46,5 @@
         android:name="us.kikin.apps.android.bgplayer.ui.login.LoginFragment"
         android:label="@string/login_title"
         tools:layout="@layout/fragment_login">
-        <action
-            android:id="@+id/action_loginFragment_to_videoListFragment"
-            app:destination="@id/videoListFragment" />
     </fragment>
 </navigation>
