@@ -4,10 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
+
         <variable
             name="video"
             type="us.kikin.apps.android.bgplayer.models.VideoModel" />
+
         <variable
             name="handlers"
             type="us.kikin.apps.android.bgplayer.ui.videos.VideoItemClickListener" />
@@ -18,9 +21,9 @@
         android:layout_height="wrap_content"
         android:clipToPadding="false"
         android:paddingStart="@dimen/grid_2"
-        android:paddingTop="@dimen/grid_3"
+        android:paddingTop="@dimen/grid_1"
         android:paddingEnd="@dimen/grid_2"
-        android:paddingBottom="@dimen/grid_3">
+        android:paddingBottom="@dimen/grid_1">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -67,11 +70,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/grid_2"
+                    android:paddingBottom="@dimen/grid_2"
                     android:text="@{video.name}"
                     android:textAlignment="viewStart"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     android:textColor="@color/material_on_surface_emphasis_high_type"
-                    app:firstBaselineToTopHeight="40dp"
+                    app:firstBaselineToTopHeight="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/video_published_date"
@@ -83,7 +87,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/grid_1"
-                    android:layout_marginTop="@dimen/grid_3"
                     android:layout_marginEnd="@dimen/grid_0_25"
                     android:layout_marginBottom="@dimen/grid_1"
                     android:onClick="@{() -> handlers.onVideoShowClicked(video.showModel)}"
