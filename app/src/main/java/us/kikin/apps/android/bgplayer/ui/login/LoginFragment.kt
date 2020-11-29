@@ -27,9 +27,9 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         with(binding) {
-            webview.settings.javaScriptEnabled = true
-            webview.webViewClient = LoginWebViewClient()
-            webview.loadUrl(LOGIN_URL)
+            webView.settings.javaScriptEnabled = true
+            webView.webViewClient = LoginWebViewClient()
+            webView.loadUrl(LOGIN_URL)
         }
 
         return binding.root
