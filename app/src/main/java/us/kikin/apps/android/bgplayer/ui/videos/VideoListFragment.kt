@@ -22,7 +22,7 @@ import us.kikin.apps.android.bgplayer.models.ShowModel
 class VideoListFragment : Fragment(), VideoItemClickListener {
 
     private var _binding: FragmentVideoListBinding? = null
-    private val binding get() = requireNotNull(_binding)
+    private val binding get() = _binding!!
     private var videoJob: Job? = null
     private val viewModel: VideoViewModel by viewModels()
     private val adapter = VideoAdapter(this)
