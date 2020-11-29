@@ -20,9 +20,7 @@ class VideoViewHolder(
         with(binding) {
             video = item
             handlers = listener
-            videoThumbnail.load(item.thumbnailUrl) {
-                crossfade(true)
-            }
+            videoThumbnail.load(item.thumbnailUrl)
             videoShow.isVisible = item.showModel != null && shouldShowShowButton
         }
     }

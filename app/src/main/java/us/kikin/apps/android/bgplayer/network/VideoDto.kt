@@ -11,6 +11,8 @@ class VideoDto(
     @SerializedName("deck") val description: String,
     @SerializedName("publish_date") val publishedDate: Date,
     @SerializedName("video_show") val videoShow: VideoShowDto?,
-    @SerializedName("hd_url") val hdUrl: String,
+    @SerializedName("hd_url") val hdUrl: String?,
+    @SerializedName("low_url") val lowUrl: String,
+    @SerializedName("high_url") val highUrl: String?,
     @SerializedName("user") val user: String?
 )

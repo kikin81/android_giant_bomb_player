@@ -14,7 +14,7 @@ class ShowHeaderViewHolder(
     fun bind(item: ShowModel, showClickListener: ShowItemClickListener) {
         with(binding) {
             showName.text = item.name
-            showThumbnail.load(item.imageUrl) { crossfade(true) }
+            showThumbnail.load(item.imageUrl)
             showFollowButton.setOnClickListener { showClickListener.onFollowShowClicked(item.id) }
         }
     }

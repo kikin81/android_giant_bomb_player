@@ -1,10 +1,10 @@
 package us.kikin.apps.android.bgplayer.data
 
 import androidx.paging.PagingSource
+import java.io.IOException
 import retrofit2.HttpException
 import us.kikin.apps.android.bgplayer.models.VideoModel
 import us.kikin.apps.android.bgplayer.network.VideoService
-import java.io.IOException
 
 class VideoSearchPagingSource(
     private val videoService: VideoService,

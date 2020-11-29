@@ -65,6 +65,6 @@ class VideoDetailFragment : Fragment(), Player.EventListener {
 
     private fun bindVideo(video: VideoModel) {
         binding.video = video
-        binding.videoThumbnail.load(video.thumbnailUrl) { crossfade(true) }
+        binding.videoThumbnail.load(video.thumbnailUrl)
     }
 }
