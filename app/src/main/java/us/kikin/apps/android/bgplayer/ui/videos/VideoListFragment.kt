@@ -22,7 +22,7 @@ import us.kikin.apps.android.bgplayer.models.ShowModel
 class VideoListFragment : Fragment(), VideoItemClickListener {
 
     private var _binding: FragmentVideoListBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = requireNotNull(_binding)
     private var videoJob: Job? = null
     private val viewModel: VideoViewModel by viewModels()
     private val adapter = VideoAdapter(this)
@@ -33,33 +33,38 @@ class VideoListFragment : Fragment(), VideoItemClickListener {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentVideoListBinding.inflate(inflater, container, false)
-        initAdapter()
-        getLatestVideos()
-
         return binding.root
     }
 
-    private fun initAdapter() {
-        binding.recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
-            header = VideoLoadStateAdapter(),
-            footer = VideoLoadStateAdapter()
-        )
-        adapter.addLoadStateListener { loadState ->
-            // Only show the list if refresh succeeds.
-            binding.recyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
-            // Show loading spinner during initial load or refresh.
-            binding.listProgress.isVisible = loadState.source.refresh is LoadState.Loading
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initAdapter()
+        getLatestVideos()
+    }
 
-            val errorState = loadState.source.append as? LoadState.Error
-                ?: loadState.source.prepend as? LoadState.Error
-                ?: loadState.append as? LoadState.Error
-                ?: loadState.prepend as? LoadState.Error
-            errorState?.let {
-                Toast.makeText(
-                    requireContext(),
-                    "\uD83D\uDE28 Whoops ${it.error}",
-                    Toast.LENGTH_LONG
-                ).show()
+    private fun initAdapter() {
+        with(binding) {
+            recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
+                header = VideoLoadStateAdapter(),
+                footer = VideoLoadStateAdapter()
+            )
+            adapter.addLoadStateListener { loadState ->
+                // Only show the list if refresh succeeds.
+                recyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
+                // Show loading spinner during initial load or refresh.
+                listProgress.isVisible = loadState.source.refresh is LoadState.Loading
+
+                val errorState = loadState.source.append as? LoadState.Error
+                    ?: loadState.source.prepend as? LoadState.Error
+                    ?: loadState.append as? LoadState.Error
+                    ?: loadState.prepend as? LoadState.Error
+                errorState?.let {
+                    Toast.makeText(
+                        requireContext(),
+                        "\uD83D\uDE28 Whoops ${it.error}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
         }
     }

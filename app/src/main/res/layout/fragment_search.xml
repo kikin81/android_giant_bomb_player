@@ -18,20 +18,28 @@
                 android:layout_height="wrap_content"
                 android:minHeight="?attr/actionBarSize"
                 app:contentInsetStartWithNavigation="0dp"
-                app:layout_scrollFlags="scroll|enterAlways|snap"
-                app:navigationIcon="@drawable/ic_search">
+                app:layout_scrollFlags="scroll|enterAlways|snap">
 
-                <EditText
-                    android:id="@+id/search_edit_text"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@null"
+                    android:layout_margin="4dp"
                     android:hint="@string/search_videos"
-                    android:imeOptions="actionSearch"
-                    android:inputType="textCapWords"
-                    android:lines="1"
-                    android:selectAllOnFocus="true"
-                    android:textAppearance="?attr/textAppearanceSubtitle1" />
+                    app:endIconMode="clear_text"
+                    app:startIconDrawable="@drawable/ic_search">
+
+                    <EditText
+                        android:id="@+id/search_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:imeOptions="actionSearch"
+                        android:inputType="textCapWords"
+                        android:lines="1"
+                        android:selectAllOnFocus="true"
+                        android:textAppearance="?attr/textAppearanceSubtitle1" />
+                </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.appcompat.widget.Toolbar>
 
