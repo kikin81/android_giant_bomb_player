@@ -44,7 +44,7 @@
             android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-            tools:listitem="@layout/item_video" />
+            tools:listitem="@layout/item_search_result" />
 
         <androidx.core.widget.ContentLoadingProgressBar
             android:id="@+id/list_progress"

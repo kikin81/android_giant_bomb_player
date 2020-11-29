@@ -49,5 +49,10 @@
     <fragment
         android:id="@+id/search_destination"
         android:name="us.kikin.apps.android.bgplayer.ui.search.SearchFragment"
-        android:label="SearchFragment" />
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/videoDetailAction"
+            app:destination="@id/videoDetailFragment" />
+    </fragment>
 </navigation>

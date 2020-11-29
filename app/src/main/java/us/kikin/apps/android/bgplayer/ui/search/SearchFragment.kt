@@ -11,8 +11,10 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.UnsupportedOperationException
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
@@ -92,10 +94,11 @@ class SearchFragment : Fragment(), VideoItemClickListener {
     }
 
     override fun onVideoClicked(videoId: Long) {
-        TODO("Not yet implemented")
+        val action = SearchFragmentDirections.videoDetailAction(videoId)
+        findNavController().navigate(action)
     }
 
     override fun onVideoShowClicked(showModel: ShowModel) {
-        TODO("Not yet implemented")
+        throw UnsupportedOperationException("Show clicked not allowed here")
     }
 }
