@@ -25,7 +25,7 @@
         android:layout_marginTop="16dp"
         android:textAppearance="?attr/textAppearanceHeadline6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/show_thumbnail"
+        app:layout_constraintStart_toEndOf="@id/show_thumbnail"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Giant Bombcast" />
 
@@ -36,7 +36,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="6dp"
         android:text="@string/follow"
-        app:layout_constraintBottom_toBottomOf="@+id/show_thumbnail"
-        app:layout_constraintStart_toEndOf="@+id/show_thumbnail" />
+        app:layout_constraintBottom_toBottomOf="@id/show_thumbnail"
+        app:layout_constraintStart_toEndOf="@id/show_thumbnail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
