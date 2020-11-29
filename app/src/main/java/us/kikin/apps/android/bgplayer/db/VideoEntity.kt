@@ -24,7 +24,7 @@ data class VideoEntity(
         thumbnailUrl = dto.imageDto.screenUrl,
         description = dto.description,
         publishedDate = dto.publishedDate,
-        hdUrl = dto.hdUrl,
+        hdUrl = dto.hdUrl ?: (dto.highUrl ?: dto.lowUrl),
         showId = dto.videoShow?.id
     )
 }

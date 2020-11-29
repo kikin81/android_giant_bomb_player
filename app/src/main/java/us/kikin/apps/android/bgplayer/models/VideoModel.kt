@@ -30,7 +30,7 @@ data class VideoModel(
             } else {
                 null
             },
-            dto.hdUrl,
+            dto.hdUrl ?: (dto.highUrl ?: dto.lowUrl),
             dto.user
         )
 

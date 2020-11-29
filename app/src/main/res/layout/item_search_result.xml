@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="video"
+            type="us.kikin.apps.android.bgplayer.models.VideoModel" />
+
+        <variable
+            name="clickHandler"
+            type="us.kikin.apps.android.bgplayer.ui.videos.VideoItemClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/grid_2"
+        android:paddingTop="@dimen/grid_1"
+        android:paddingEnd="@dimen/grid_2"
+        android:paddingBottom="@dimen/grid_1">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{(v) -> clickHandler.onVideoClicked(video.id)}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/video_thumbnail"
+                    android:layout_width="160dp"
+                    android:layout_height="0dp"
+                    android:contentDescription="@string/video_thumbnail_content_description"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="H,16:9"
+                    app:layout_constraintEnd_toStartOf="@id/video_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/video_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:lines="2"
+                    android:paddingHorizontal="@dimen/grid_2"
+                    android:paddingTop="@dimen/grid_0_5"
+                    android:text="@{video.name}"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/video_thumbnail"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Really long and descriptive video title from giant bomb" />
+
+                <TextView
+                    android:id="@+id/video_published_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/grid_2"
+                    android:text="@{video.publishedInfoDisplay}"
+                    android:textAppearance="?attr/textAppearanceCaption"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/video_thumbnail"
+                    app:layout_constraintTop_toBottomOf="@id/video_title"
+                    tools:text="November 20, 2011 by abby" />
+
+                <TextView
+                    android:id="@+id/video_length"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/grid_0_5"
+                    android:layout_marginBottom="@dimen/grid_0_5"
+                    android:text="@{video.runtimeDisplay}"
+                    app:layout_constraintBottom_toBottomOf="@id/video_thumbnail"
+                    app:layout_constraintEnd_toEndOf="@id/video_thumbnail"
+                    tools:text="1:20:24" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,6 +1,8 @@
-package us.kikin.apps.android.bgplayer.ui.videos
+package us.kikin.apps.android.bgplayer.ui.search
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,46 +14,49 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.UnsupportedOperationException
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import us.kikin.apps.android.bgplayer.databinding.FragmentVideoListBinding
+import us.kikin.apps.android.bgplayer.databinding.FragmentSearchBinding
 import us.kikin.apps.android.bgplayer.models.ShowModel
+import us.kikin.apps.android.bgplayer.ui.videos.VideoItemClickListener
+import us.kikin.apps.android.bgplayer.ui.videos.VideoLoadStateAdapter
 
 @AndroidEntryPoint
-class VideoListFragment : Fragment(), VideoItemClickListener {
+class SearchFragment : Fragment(), VideoItemClickListener {
 
-    private var _binding: FragmentVideoListBinding? = null
+    private var _binding: FragmentSearchBinding? = null
     private val binding get() = requireNotNull(_binding)
-    private var videoJob: Job? = null
-    private val viewModel: VideoViewModel by viewModels()
-    private val adapter = VideoAdapter(this)
+    private var debouncePeriod: Long = 500
+    private val viewModel: SearchViewModel by viewModels()
+    private val adapter = SearchAdapter(this)
+    private var searchJob: Job? = null
+    private val searchTextWatcher = object : TextWatcher {
+        override fun afterTextChanged(editable: Editable?) {
+            getVideosByQuery(editable.toString())
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentVideoListBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initAdapter()
-        getLatestVideos()
-    }
-
-    private fun initAdapter() {
-        with(binding) {
-            recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
+        _binding = FragmentSearchBinding.inflate(inflater, container, false).apply {
+            searchEditText.addTextChangedListener(searchTextWatcher)
+            // init adapter
+            searchResults.adapter = adapter.withLoadStateHeaderAndFooter(
                 header = VideoLoadStateAdapter(),
                 footer = VideoLoadStateAdapter()
             )
             adapter.addLoadStateListener { loadState ->
-                // Only show the list if refresh succeeds.
-                recyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
-                // Show loading spinner during initial load or refresh.
+                searchResults.isVisible = loadState.source.refresh is LoadState.NotLoading
                 listProgress.isVisible = loadState.source.refresh is LoadState.Loading
 
                 val errorState = loadState.source.append as? LoadState.Error
@@ -67,13 +72,18 @@ class VideoListFragment : Fragment(), VideoItemClickListener {
                 }
             }
         }
+
+        return binding.root
     }
 
-    private fun getLatestVideos() {
-        videoJob?.cancel()
-        videoJob = lifecycleScope.launch {
-            viewModel.getLatestVideos().collectLatest {
-                adapter.submitData(it)
+    private fun getVideosByQuery(query: String) {
+        searchJob?.cancel()
+        searchJob = lifecycleScope.launch {
+            delay(debouncePeriod)
+            if (query.length > 3) {
+                viewModel.getVideosWithQuery(query).collectLatest {
+                    adapter.submitData(it)
+                }
             }
         }
     }
@@ -84,12 +94,11 @@ class VideoListFragment : Fragment(), VideoItemClickListener {
     }
 
     override fun onVideoClicked(videoId: Long) {
-        val action = VideoListFragmentDirections.videoDetailAction(videoId)
+        val action = SearchFragmentDirections.videoDetailAction(videoId)
         findNavController().navigate(action)
     }
 
     override fun onVideoShowClicked(showModel: ShowModel) {
-        val action = VideoListFragmentDirections.videoShowAction(showModel.id, showModel.name)
-        findNavController().navigate(action)
+        throw UnsupportedOperationException("Show clicked not allowed here")
     }
 }

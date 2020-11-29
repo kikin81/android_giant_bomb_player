@@ -32,4 +32,15 @@ interface VideoService {
 
     @GET("video_show/{show_id}")
     suspend fun fetchShow(@Path("show_id") id: Long): ShowResponse
+
+    /**
+     * Search videos by query
+     */
+    @GET("search")
+    suspend fun fetchVideosForQuery(
+        @Query("query") query: String,
+        @Query("offset") offset: Int,
+        @Query("limit") limit: Int,
+        @Query("resources") resources: String = "video"
+    ): VideoResponse
 }
