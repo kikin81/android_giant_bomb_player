@@ -1,20 +1,21 @@
 package us.kikin.apps.android.bgplayer.data
 
 import androidx.paging.PagingSource
-import java.io.IOException
 import retrofit2.HttpException
 import us.kikin.apps.android.bgplayer.models.VideoModel
 import us.kikin.apps.android.bgplayer.network.VideoService
+import java.io.IOException
 
-class VideoPagingSource(
-    private val videoService: VideoService
+class VideoSearchPagingSource(
+    private val videoService: VideoService,
+    private val query: String
 ) : PagingSource<Int, VideoModel>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, VideoModel> {
         val offset = params.key ?: PAGE_OFFSET
 
         return try {
-            val response = videoService.fetchVideos(offset, PAGE_SIZE)
+            val response = videoService.fetchVideosForQuery(query, offset, PAGE_SIZE)
             val videos = response.videos.map { VideoModel(it) }
             LoadResult.Page(
                 data = videos,

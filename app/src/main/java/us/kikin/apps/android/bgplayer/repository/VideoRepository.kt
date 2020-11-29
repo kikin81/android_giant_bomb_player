@@ -8,6 +8,7 @@ import javax.inject.Singleton
 import kotlinx.coroutines.flow.Flow
 import us.kikin.apps.android.bgplayer.data.ShowPagingSource
 import us.kikin.apps.android.bgplayer.data.VideoPagingSource
+import us.kikin.apps.android.bgplayer.data.VideoSearchPagingSource
 import us.kikin.apps.android.bgplayer.models.VideoModel
 import us.kikin.apps.android.bgplayer.network.VideoService
 
@@ -23,6 +24,16 @@ class VideoRepository @Inject constructor(
                 enablePlaceholders = false
             ),
             pagingSourceFactory = { VideoPagingSource(videoService) }
+        ).flow
+    }
+
+    fun getVideosForQueryStream(query: String): Flow<PagingData<VideoModel>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = NETWORK_PAGE_SIZE,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = { VideoSearchPagingSource(videoService, query) }
         ).flow
     }
 
