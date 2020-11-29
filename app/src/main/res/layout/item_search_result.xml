@@ -66,7 +66,7 @@
                     android:id="@+id/video_published_date"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:paddingStart="@dimen/grid_2"
+                    android:layout_marginStart="@dimen/grid_2"
                     android:text="@{video.publishedInfoDisplay}"
                     android:textAppearance="?attr/textAppearanceCaption"
                     app:layout_constraintBottom_toBottomOf="parent"
