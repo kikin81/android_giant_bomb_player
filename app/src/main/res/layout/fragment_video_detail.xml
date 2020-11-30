@@ -13,27 +13,26 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?android:colorBackground"
-        android:clipToPadding="false"
-        android:fillViewport="true"
-        android:paddingHorizontal="@dimen/grid_0_5"
-        android:paddingTop="@dimen/grid_1"
+        android:background="#1e1e2e"
         tools:context=".ui.video_detail.VideoDetailFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/bottom_app_bar_height"
             android:theme="@style/ThemeOverlay.MaterialComponents.Dark">
 
             <com.google.android.exoplayer2.ui.PlayerView
                 android:id="@+id/video_view"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                app:auto_show="true"
+                app:controller_layout_id="@layout/exo_player_control_view"
                 app:layout_constraintDimensionRatio="H,16:9"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:surface_type="surface_view"
+                app:use_controller="true" />
 
             <ImageView
                 android:id="@+id/video_thumbnail"
@@ -41,6 +40,7 @@
                 android:layout_height="0dp"
                 android:animateLayoutChanges="true"
                 android:contentDescription="@string/video_thumbnail_content_description"
+                android:visibility="gone"
                 app:layout_constraintDimensionRatio="16:9"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -51,6 +51,7 @@
                 style="?android:attr/progressBarStyleLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/video_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
