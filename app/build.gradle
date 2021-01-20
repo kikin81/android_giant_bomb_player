@@ -9,7 +9,7 @@ plugins {
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "us.kikin.apps.android.bgplayer"
@@ -58,7 +58,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation "com.google.android.material:material:$material_version"
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
 
     // architecture components
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
