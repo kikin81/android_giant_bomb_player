@@ -20,4 +20,12 @@
     <string name="search">Search</string>
     <string name="shows">Shows</string>
     <string name="search_videos">Search Videos</string>
+    <string name="video_close_description">Close player</string>
+    <string name="video_previous_description">Previous track</string>
+    <string name="video_rewind_description">Rewind video</string>
+    <string name="video_play_description">Play video</string>
+    <string name="video_pause_description">Pause video</string>
+    <string name="video_ffw_description">Fast forward video</string>
+    <string name="video_skip_description">Skip video</string>
+    <string name="video_fullscreen_description">Toggle fullscreen</string>
 </resources>
