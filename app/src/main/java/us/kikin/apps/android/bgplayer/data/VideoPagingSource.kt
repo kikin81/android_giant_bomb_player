@@ -1,6 +1,7 @@
 package us.kikin.apps.android.bgplayer.data
 
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import java.io.IOException
 import retrofit2.HttpException
 import us.kikin.apps.android.bgplayer.models.VideoModel
@@ -25,6 +26,13 @@ class VideoPagingSource(
             return LoadResult.Error(exception)
         } catch (exception: HttpException) {
             return LoadResult.Error(exception)
+        }
+    }
+
+    override fun getRefreshKey(state: PagingState<Int, VideoModel>): Int? {
+        return state.anchorPosition?.let {
+            state.closestPageToPosition(it)?.prevKey?.plus(1)
+                ?: state.closestPageToPosition(it)?.nextKey?.minus(1)
         }
     }
 

@@ -16,7 +16,7 @@ import us.kikin.apps.android.bgplayer.databinding.FragmentVideoDetailBinding
 import us.kikin.apps.android.bgplayer.models.VideoModel
 
 @AndroidEntryPoint
-class VideoDetailFragment : Fragment(), Player.EventListener {
+class VideoDetailFragment : Fragment(), Player.Listener {
 
     private var _binding: FragmentVideoDetailBinding? = null
     private val binding get() = requireNotNull(_binding)
@@ -34,14 +34,13 @@ class VideoDetailFragment : Fragment(), Player.EventListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.videoLiveData.observe(viewLifecycleOwner, { bindVideo(it) })
+        viewModel.videoLiveData.observe(viewLifecycleOwner) { bindVideo(it) }
         viewModel.player.observe(
-            viewLifecycleOwner,
-            {
-                binding.videoView.player = it
-                binding.videoView.player?.addListener(this)
-            }
-        )
+            viewLifecycleOwner
+        ) {
+            binding.videoView.player = it
+            binding.videoView.player?.addListener(this)
+        }
     }
 
     override fun onPlaybackStateChanged(state: Int) {
